@@ -7,4 +7,12 @@ public class Position {
         this.cols = cols;
         this.rows = rows;
     }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
 }

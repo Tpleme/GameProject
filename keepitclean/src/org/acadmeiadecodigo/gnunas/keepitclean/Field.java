@@ -12,7 +12,7 @@ public class Field {
     private int width;
     public static final int PADDING=10;
 
-    public Field(int height,int width){
+    public Field(int width, int height){
         this.height=height;
         this.width=width;
     }
@@ -22,13 +22,8 @@ public class Field {
 
         screen.fill();
 
-       // int calcWidth = (screen.getWidth()/4)+PADDING;
-        //int calcHeight = (screen.getHeight()/4)+PADDING;
-        //Rectangle small = new Rectangle(170,100,960,540);
+        Picture background = new Picture(170,100,"livingRoom.png");
+        background.draw();
 
-        Picture fundo = new Picture(170,100,"fundo.jpg");
-        fundo.draw();
-        // small.setColor(Color.WHITE);
-       // small.fill();
     }
 }

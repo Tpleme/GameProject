@@ -1,4 +1,4 @@
-package org.acadmeiadecodigo.gnunas.keepitclean;
+package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
 public interface Interactable {
 
