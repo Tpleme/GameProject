@@ -31,14 +31,4 @@ public class Field {
         // small.setColor(Color.WHITE);
        // small.fill();
     }
-
-    public void move() {
-
-        Keyboard kb = new Keyboard(new Field(1280,720));
-        KeyboardEvent keyboardEvent = new KeyboardEvent();
-        keyboardEvent.setKey(KeyboardEvent.KEY_SPACE);
-        keyboardEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        kb.addEventListener(keyboardEvent);
-    }
-
 }
