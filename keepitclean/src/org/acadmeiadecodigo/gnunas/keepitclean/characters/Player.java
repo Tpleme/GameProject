@@ -28,10 +28,22 @@ public class Player extends Character implements KeyboardHandler {
     public void move(Directions direction) {
 
         switch (direction){
-            case DOWN -> playerImage.translate(0,10);
-            case UP -> playerImage.translate(0,-10);
-            case RIGHT -> playerImage.translate(10,0);
-            case LEFT -> playerImage.translate(-10,0);
+            case DOWN -> {
+                playerImage.translate(0,10);
+                playerImage.load("Character/CharacterFront.png");
+            }
+            case UP -> {
+                playerImage.translate(0,-10);
+                playerImage.load("Character/CharacterBack.png");
+            }
+            case RIGHT -> {
+                playerImage.translate(10,0);
+                playerImage.load("Character/CharacterRight.png");
+            }
+            case LEFT -> {
+                playerImage.translate(-10,0);
+                playerImage.load("Character/CharacterLeft.png");
+            }
         }
     }
 
