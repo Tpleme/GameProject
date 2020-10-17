@@ -17,6 +17,7 @@ public class Game {
         player = new Player();
         cat = new Cat();
         showScore();
+        cat.move();
     }
 
     public void showScore(){

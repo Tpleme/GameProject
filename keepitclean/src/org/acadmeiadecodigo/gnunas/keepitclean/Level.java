@@ -13,4 +13,7 @@ public class Level {
         field.draw();
     }
 
+    public Field getField() {
+        return field;
+    }
 }
