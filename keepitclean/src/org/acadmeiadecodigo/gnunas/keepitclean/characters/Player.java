@@ -5,7 +5,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.acadmeiadecodigo.gnunas.keepitclean.Directions;
+import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.Position;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Character;
 
@@ -25,7 +25,7 @@ public class Player extends Character implements KeyboardHandler {
     }
 
     @Override
-    public void move(Directions direction) {
+    public void move(Direction direction) {
 
         switch (direction){
             case DOWN -> {
@@ -87,22 +87,22 @@ public class Player extends Character implements KeyboardHandler {
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
             System.out.println("down");
-            move(Directions.DOWN);
+            move(Direction.DOWN);
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
             System.out.println("UP");
-            move(Directions.UP);
+            move(Direction.UP);
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
             System.out.println("left");
-            move(Directions.LEFT);
+            move(Direction.LEFT);
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
             System.out.println("right");
-            move(Directions.RIGHT);
+            move(Direction.RIGHT);
         }
     }
 
@@ -110,4 +110,6 @@ public class Player extends Character implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
     }
+
+
 }
