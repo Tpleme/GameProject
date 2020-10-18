@@ -2,6 +2,7 @@ package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.Directions;
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
 
 import java.util.LinkedList;
 
@@ -105,6 +106,15 @@ public class Cat extends Character {
 
     public void poop() {
         System.out.println("PPPPPOOOOOOPPED");
+        new Poop(this);
+    }
+
+    public int getImageX() {
+        return catImage.getX() + 32;
+    }
+
+    public int getImageY() {
+        return catImage.getY() + 32;
     }
 
 }
