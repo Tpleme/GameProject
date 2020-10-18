@@ -10,7 +10,7 @@ public enum Direction {
     public Direction opposite(){
 
         Direction oppositeDirection = Direction.NONE;
-        
+
         switch (this){
 
             case UP:
