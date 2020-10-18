@@ -13,6 +13,7 @@ public class Player extends Character implements KeyboardHandler {
     Keyboard kb;
     Picture playerImage;
 
+
     public Player() {
         playerImage = new Picture(500,500, "Character/CharacterFront.png");
         kb = new Keyboard(this);
@@ -110,4 +111,6 @@ public class Player extends Character implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
     }
+
+
 }
