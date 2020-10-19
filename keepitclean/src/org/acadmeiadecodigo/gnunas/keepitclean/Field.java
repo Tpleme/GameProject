@@ -29,7 +29,7 @@ public class Field {
 
         GameObject table = new Table(696 + offsetX,206 + offsetY,"objects/Table.png");
         GameObject bookshelf = new Bookshelf(79 + offsetX,35 + offsetY,"objects/BookShelf.png");
-        GameObject couch = new Couch(92 + offsetX, 171 + offsetY, "objects/couch.png");
+        GameObject couch = new Couch(92 + offsetX, 200 + offsetY, "objects/couch.png");
         GameObject plant = new Plant(480 + offsetX, 42 + offsetY ,"objects/Plant.png");
 
         objects = new GameObject[] {table,bookshelf,couch,plant};

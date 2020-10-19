@@ -14,14 +14,16 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
     private boolean interacting;
     private int[] keyList;
     private boolean[] pressedKeys = new boolean[5];
+    private Player player;
 
 
-    public KeyboardPlayerHandler(Direction direction, int up,int down,int left,int right,int space){
+    public KeyboardPlayerHandler(Player player, Direction direction, int up,int down,int left,int right,int space){
         this.direction =direction;
         moving = false;
         interacting = false;
         kb = new Keyboard(this);
         keyList= new int[]{up,down,left,right,space};
+        this.player = player;
 
     }
 
@@ -99,25 +101,23 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
     }
 
     private Direction moveNewDirection(){
+
         if(pressedKeys[0]){
-            System.out.println("up");
             return Direction.UP;
         }
 
         if(pressedKeys[1]){
-            System.out.println("down");
             return Direction.DOWN;
         }
 
         if(pressedKeys[2]){
-            System.out.println("left");
             return Direction.LEFT;
         }
 
         if(pressedKeys[3]){
-            System.out.println("right");
             return Direction.RIGHT;
         }
+
 
         return Direction.NONE;
     }
@@ -153,7 +153,7 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
         }
 
         direction = moveNewDirection();
-
+        player.checkMovement();
 
     }
 

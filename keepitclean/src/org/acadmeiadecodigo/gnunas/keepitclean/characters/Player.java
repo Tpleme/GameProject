@@ -10,9 +10,7 @@ import org.acadmeiadecodigo.gnunas.keepitclean.objects.Bookshelf;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Character;
-
-
-
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 
 public class Player extends Character {
 
@@ -35,16 +33,12 @@ public class Player extends Character {
 
         init();
         kbConfiguration();
-
-       // playerHandler();
     }
 
     public void kbConfiguration(){
-        kbPlayerHandler = new KeyboardPlayerHandler(direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace());
-        System.out.println("criado");
+        kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace());
         kbPlayerHandler.loadKboardConfig();
     }
-
 
     public void init(){
         playerImage.draw();
@@ -52,26 +46,36 @@ public class Player extends Character {
 
     public void checkCollisions(){
 
-        if(playerImage.getX() <= level.getField().getBackground().getX()) {
-            canMoveLeft = !movingLeft;
+        if(playerImage.getX()+10 <= level.getField().getBackground().getX()) {
+            canMoveLeft = false;
             System.out.println("Collision Left");
         }
         if(playerImage.getMaxY() >= level.getField().getBackground().getMaxY()){
-            canMoveDown = !movingDown;
+            canMoveDown = false;
             System.out.println("Collision Down");
         }
         if(playerImage.getY() <= level.getField().getBackground().getY() + 60) {
             System.out.println("Collision Top");
-            canMoveUp = !movingUp;
+            canMoveUp = false;
         }
-        if(playerImage.getMaxX() >= level.getField().getBackground().getMaxX()){
+        if(playerImage.getMaxX()-10 >= level.getField().getBackground().getMaxX()){
             System.out.println("Collision Right");
-            canMoveRight = !movingRight;
+            canMoveRight = false;
         }
 
         for (GameObject go : level.getField().getObjects()) {
-            if((playerImage.getMaxX() >= go.getX() && playerImage.getMaxY() >= go.getY()) && (playerImage.getX() <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
+            if((playerImage.getMaxX()-15 >= go.getX() && playerImage.getMaxY()-15 >= go.getY()) && (playerImage.getX()+15 <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
                 System.out.println("Collision " + go.toString());
+
+                if(go instanceof Interactable)
+                    ((Interactable) go).interact();
+
+                //pequeno bounce para que nao continue a registar como collided
+                if(movingUp){playerImage.translate(0,2);}
+                if(movingDown){playerImage.translate(0,-2);}
+                if(movingRight){playerImage.translate(-2,0);}
+                if(movingLeft){playerImage.translate(2,0);}
+
                 canMoveUp = !movingUp;
                 canMoveDown = !movingDown;
                 canMoveRight = !movingRight;
@@ -86,7 +90,6 @@ public class Player extends Character {
         }
     }
 
-
     public Direction chooseDirection(){
         Direction nextDirection = kbPlayerHandler.getDirection();
 
@@ -96,10 +99,6 @@ public class Player extends Character {
 
     @Override
     public void move(Direction direction) {
-        //
-        // playerDirection = direction
-        // field.moveDirection (direction,this)
-        // field tem de ter a conversao para X,Y com os Translates lá.
 
         checkCollisions();
 
