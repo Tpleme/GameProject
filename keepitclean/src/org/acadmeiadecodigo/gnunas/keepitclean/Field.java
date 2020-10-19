@@ -27,26 +27,5 @@ public class Field {
 
     }
 
-    public void movePlayer(Direction direction){
 
-
-        switch (direction){
-            case DOWN -> {
-                playerImage.translate(0,10);
-                playerImage.load("Character/CharacterFront.png");
-            }
-            case UP -> {
-                playerImage.translate(0,-10);
-                playerImage.load("Character/CharacterBack.png");
-            }
-            case RIGHT -> {
-                playerImage.translate(10,0);
-                playerImage.load("Character/CharacterRight.png");
-            }
-            case LEFT -> {
-                playerImage.translate(-10,0);
-                playerImage.load("Character/CharacterLeft.png");
-            }
-        }
-    }
 }
