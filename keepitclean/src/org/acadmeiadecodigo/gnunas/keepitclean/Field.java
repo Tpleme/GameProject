@@ -66,4 +66,6 @@ public class Field {
     public GameObject[] getObjects() {
         return objects;
     }
+
+
 }

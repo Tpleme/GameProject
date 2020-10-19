@@ -1,7 +1,7 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.acadmeiadecodigo.gnunas.keepitclean.Directions;
+import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Character;
 
 public class Cat extends Character {
@@ -14,7 +14,7 @@ public class Cat extends Character {
     }
 
     @Override
-    public void move(Directions direction) {
+    public void move(Direction direction) {
 
     }
 

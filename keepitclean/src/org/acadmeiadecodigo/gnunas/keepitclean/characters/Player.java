@@ -5,13 +5,19 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.acadmeiadecodigo.gnunas.keepitclean.Directions;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Bookshelf;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
+import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
+import org.acadmeiadecodigo.gnunas.keepitclean.characters.Character;
 
-public class Player extends Character implements KeyboardHandler {
-    Keyboard kb;
+
+
+
+public class Player extends Character {
+
+    private KeyboardPlayerHandler kbPlayerHandler;
+    private Direction direction;
     Picture playerImage;
     private boolean movingUp = false;
     private boolean movingDown = false;
@@ -25,12 +31,20 @@ public class Player extends Character implements KeyboardHandler {
 
     public Player(Level level) {
         playerImage = new Picture(500,500, "Character/CharacterFront.png");
-        kb = new Keyboard(this);
         this.level = level;
 
         init();
-        playerHandler();
+        kbConfiguration();
+
+       // playerHandler();
     }
+
+    public void kbConfiguration(){
+        kbPlayerHandler = new KeyboardPlayerHandler(direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace());
+        System.out.println("criado");
+        kbPlayerHandler.loadKboardConfig();
+    }
+
 
     public void init(){
         playerImage.draw();
@@ -66,8 +80,26 @@ public class Player extends Character implements KeyboardHandler {
         }
     }
 
+    public void checkMovement(){
+        if(kbPlayerHandler.isMoving()){
+            move(chooseDirection());
+        }
+    }
+
+
+    public Direction chooseDirection(){
+        Direction nextDirection = kbPlayerHandler.getDirection();
+
+        return nextDirection;
+    }
+
+
     @Override
-    public void move(Directions direction) {
+    public void move(Direction direction) {
+        //
+        // playerDirection = direction
+        // field.moveDirection (direction,this)
+        // field tem de ter a conversao para X,Y com os Translates lá.
 
         checkCollisions();
 
@@ -129,65 +161,5 @@ public class Player extends Character implements KeyboardHandler {
                 }
             }
         }
-
-    }
-
-    public void playerHandler(){
-    KeyboardEvent kbEventSpace = new KeyboardEvent();
-    kbEventSpace.setKey(KeyboardEvent.KEY_SPACE);
-    kbEventSpace.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-    kb.addEventListener(kbEventSpace);
-
-
-     KeyboardEvent kbEventUp = new KeyboardEvent();
-     kbEventUp.setKey(KeyboardEvent.KEY_UP);
-     kbEventUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-     kb.addEventListener(kbEventUp);
-
-
-     KeyboardEvent kbEventDown = new KeyboardEvent();
-     kbEventDown.setKey(KeyboardEvent.KEY_DOWN);
-     kbEventDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-     kb.addEventListener(kbEventDown);
-
-
-     KeyboardEvent kbEventRight = new KeyboardEvent();
-     kbEventRight.setKey(KeyboardEvent.KEY_RIGHT);
-     kbEventRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-     kb.addEventListener(kbEventRight);
-
-
-     KeyboardEvent kbEventLeft = new KeyboardEvent();
-     kbEventLeft.setKey(KeyboardEvent.KEY_LEFT);
-     kbEventLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-     kb.addEventListener(kbEventLeft);
- }
-
-    @Override
-    public void keyPressed(KeyboardEvent keyboardEvent) {
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-        }
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
-            move(Directions.DOWN);
-        }
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
-            move(Directions.UP);
-        }
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
-            move(Directions.LEFT);
-        }
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-            move(Directions.RIGHT);
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyboardEvent keyboardEvent) {
-
     }
 }
