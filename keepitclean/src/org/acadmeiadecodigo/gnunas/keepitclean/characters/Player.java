@@ -37,7 +37,6 @@ public class Player extends Character {
         playerImage.draw();
     }
 
-
     public void checkMovement(){
         if(kbPlayerHandler.isMoving()){
             move(chooseDirection());
@@ -54,13 +53,10 @@ public class Player extends Character {
 
     @Override
     public void move(Direction direction) {
-
-
         //
         // playerDirection = direction
         // field.moveDirection (direction,this)
         // field tem de ter a conversao para X,Y com os Translates lá.
-
 
         switch (direction){
             case DOWN -> {
