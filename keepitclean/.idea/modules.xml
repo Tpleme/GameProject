@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/KeepitClean.iml" filepath="$PROJECT_DIR$/KeepitClean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keepitclean.iml" filepath="$PROJECT_DIR$/keepitclean.iml" />
     </modules>
   </component>
 </project>

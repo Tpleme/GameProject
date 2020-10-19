@@ -1,16 +1,19 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.acadmeiadecodigo.gnunas.keepitclean.Directions;
+
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
 
 import java.util.LinkedList;
+
+import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
+
 
 public class Cat extends Character {
 
     private Picture catImage;
     private int counter = 15000;
-    private LinkedList<Directions> list;
+    private LinkedList<Direction> list;
     private final int MIN = 100;
     private final int MAX = 300;
 
@@ -25,11 +28,11 @@ public class Cat extends Character {
     public void move() {
 
         for (int i = 0; i < counter; i++) {
-            Directions dir = Directions.values()[(int) (Math.random() * Directions.values().length)];
+            Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
             list.add(dir);
             System.out.println(dir);
 
-            if(dir == Directions.SIT) {
+            if(dir == Direction.SIT) {
                 poop();
             }
 
@@ -41,12 +44,12 @@ public class Cat extends Character {
     }
 
     @Override
-    public void move(Directions direction) {
+    public void move(Direction direction) {
 
         switch (direction) {
             case UP:
                 catImage.translate(0, -1);
-                if (list.lastIndexOf(Directions.RIGHT) > list.indexOf(Directions.LEFT)) {
+                if (list.lastIndexOf(direction.RIGHT) > list.indexOf(direction.LEFT)) {
                     catImage.load("Character/Cat_the_Cat_Right.png");
                     break;
                 }
@@ -55,7 +58,7 @@ public class Cat extends Character {
 
             case DOWN:
                 catImage.translate(0, 1);
-                if (list.lastIndexOf(Directions.RIGHT) > list.indexOf(Directions.LEFT)) {
+                if (list.lastIndexOf(direction.RIGHT) > list.indexOf(direction.LEFT)) {
                     catImage.load("Character/Cat_the_Cat_Right.png");
                     break;
                 }

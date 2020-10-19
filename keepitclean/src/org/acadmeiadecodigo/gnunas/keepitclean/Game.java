@@ -14,9 +14,9 @@ public class Game {
     public static GameState currentState;
 
 
-    public Game(){
+    public Game() {
         level = new Level();
-        player = new Player();
+        player = new Player(level);
         cat = new Cat();
         showScore();
 
@@ -25,16 +25,18 @@ public class Game {
 
     }
 
-    public void showScore(){
-        Text txt = new Text(50,50,"Score...");
-        txt.grow(20,10);
+    public void showScore() {
+
+        Text txt = new Text(100, 50, "Score...");
+        txt.grow(50, 25);
         txt.setColor(Color.RED);
         txt.draw();
     }
 
-    public void init(){
 
-        while(currentState == GameState.MAINMENU || currentState == GameState.INSTRUCTIONS){
+    public void init() {
+
+        while (currentState == GameState.MAINMENU || currentState == GameState.INSTRUCTIONS) {
 
         }
 
@@ -44,13 +46,11 @@ public class Game {
 
     }
 
-    public enum GameState{
-        MAINMENU,
-        PLAYING,
-        INSTRUCTIONS
-    }
 
-    public void exit(){
+    public void exit() {
         System.exit(0);
     }
 }
+
+
+
