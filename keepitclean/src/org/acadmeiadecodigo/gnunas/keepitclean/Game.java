@@ -11,12 +11,15 @@ public class Game {
     private Player player;
     private Cat cat;
     private int score;
+    public static GameState currentState;
+
 
     public Game(){
         level = new Level();
         player = new Player();
         cat = new Cat();
         showScore();
+        currentState = GameState.MAINMENU;
     }
 
     public void showScore(){
@@ -26,4 +29,25 @@ public class Game {
         txt.draw();
     }
 
+    public void init(){
+
+        while(currentState == GameState.MAINMENU || currentState == GameState.INSTRUCTIONS){
+
+        }
+
+        /*while(!gameOver){
+            play game here
+        }*/
+
+    }
+
+    public enum GameState{
+        MAINMENU,
+        PLAYING,
+        INSTRUCTIONS
+    }
+
+    public void exit(){
+        System.exit(0);
+    }
 }
