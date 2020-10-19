@@ -6,6 +6,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.Directions;
+import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.Position;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Character;
 
@@ -81,6 +82,8 @@ public class Player extends Character implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
+
+
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             System.out.println("space");
         }
@@ -98,15 +101,12 @@ public class Player extends Character implements KeyboardHandler {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
             System.out.println("left");
             move(Directions.LEFT);
+
+
         }
 
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-            System.out.println("right");
-            move(Directions.RIGHT);
-        }
     }
 
-    @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
     }
