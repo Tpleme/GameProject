@@ -25,7 +25,6 @@ public class Player extends Character {
         playerImage = new Picture(500, 500, "Character/CharacterFront.png");
         this.level = level;
 
-
         init();
         kbConfiguration();
 

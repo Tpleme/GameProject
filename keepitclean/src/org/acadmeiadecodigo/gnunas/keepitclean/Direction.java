@@ -9,12 +9,11 @@ public enum Direction {
     DIAGONAL_DOWN_RIGHT,
     DIAGONAL_UP_LEFT,
     DIAGONAL_UP_RIGHT,
-    SIT,
-    NONE;
+    SIT;
 
     public Direction opposite(){
 
-        Direction oppositeDirection = Direction.NONE;
+        Direction oppositeDirection = Direction.SIT;
 
         switch (this){
 
