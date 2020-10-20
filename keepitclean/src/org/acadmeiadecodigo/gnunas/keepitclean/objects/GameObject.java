@@ -1,5 +1,8 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
+
+
+
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class GameObject {
@@ -16,6 +19,10 @@ public abstract class GameObject {
         this.y = y;
         this.maxX = objectPicture.getMaxX();
         this.maxY = objectPicture.getMaxY();
+    }
+
+    public GameObject() {
+
     }
 
     public void delete(){objectPicture.delete();}
@@ -44,4 +51,5 @@ public abstract class GameObject {
     public String toString() {
         return objectPicture.toString();
     }
+
 }

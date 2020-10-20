@@ -1,15 +1,9 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
-import org.acadmeiadecodigo.gnunas.keepitclean.objects.Bookshelf;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
-import org.acadmeiadecodigo.gnunas.keepitclean.characters.Character;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 
 public class Player extends Character {
@@ -28,11 +22,11 @@ public class Player extends Character {
     private Level level;
 
     public Player(Level level) {
-        playerImage = new Picture(500,500, "Character/CharacterFront.png");
+        playerImage = new Picture(500, 500, "Character/CharacterFront.png");
         this.level = level;
 
-        init();
         kbConfiguration();
+        playerImage.draw();
     }
 
     public void kbConfiguration(){
@@ -40,24 +34,24 @@ public class Player extends Character {
         kbPlayerHandler.loadKboardConfig();
     }
 
-    public void init(){
-        playerImage.draw();
-    }
 
-    public void checkCollisions(){
+    public void checkCollisions() {
 
         if(playerImage.getX()+10 <= level.getField().getBackground().getX()) {
             canMoveLeft = false;
             System.out.println("Collision Left");
         }
+
         if(playerImage.getMaxY() >= level.getField().getBackground().getMaxY()){
-            canMoveDown = false;
             System.out.println("Collision Down");
+            canMoveDown = false;
         }
-        if(playerImage.getY() <= level.getField().getBackground().getY() + 60) {
+
+        if (playerImage.getY() <= level.getField().getBackground().getY() + 60) {
             System.out.println("Collision Top");
             canMoveUp = false;
         }
+
         if(playerImage.getMaxX()-10 >= level.getField().getBackground().getMaxX()){
             System.out.println("Collision Right");
             canMoveRight = false;
@@ -80,31 +74,30 @@ public class Player extends Character {
                 canMoveDown = !movingDown;
                 canMoveRight = !movingRight;
                 canMoveLeft = !movingLeft;
+
             }
         }
     }
 
-    public void checkMovement(){
-        if(kbPlayerHandler.isMoving()){
+    public void checkMovement() {
+        if (kbPlayerHandler.isMoving()) {
             move(chooseDirection());
         }
     }
 
-    public Direction chooseDirection(){
+    public Direction chooseDirection() {
         Direction nextDirection = kbPlayerHandler.getDirection();
-
         return nextDirection;
     }
-
 
     @Override
     public void move(Direction direction) {
 
         checkCollisions();
 
-        switch (direction){
+        switch (direction) {
             case DOWN -> {
-                if(canMoveDown) {
+                if (canMoveDown) {
                     canMoveUp = true;
                     canMoveLeft = true;
                     canMoveRight = true;
@@ -118,7 +111,7 @@ public class Player extends Character {
                 }
             }
             case UP -> {
-                if(canMoveUp) {
+                if (canMoveUp) {
                     canMoveDown = true;
                     canMoveRight = true;
                     canMoveLeft = true;
@@ -132,7 +125,7 @@ public class Player extends Character {
                 }
             }
             case RIGHT -> {
-                if(canMoveRight) {
+                if (canMoveRight) {
                     canMoveDown = true;
                     canMoveUp = true;
                     canMoveLeft = true;
@@ -146,7 +139,7 @@ public class Player extends Character {
                 }
             }
             case LEFT -> {
-                if(canMoveLeft) {
+                if (canMoveLeft) {
                     canMoveUp = true;
                     canMoveDown = true;
                     canMoveRight = true;
@@ -159,6 +152,9 @@ public class Player extends Character {
                     playerImage.load("Character/CharacterLeft.png");
                 }
             }
+
         }
+
     }
+
 }
