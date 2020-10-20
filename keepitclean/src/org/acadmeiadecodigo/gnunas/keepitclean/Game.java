@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Player;
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.Weed;
 
 public class Game {
 

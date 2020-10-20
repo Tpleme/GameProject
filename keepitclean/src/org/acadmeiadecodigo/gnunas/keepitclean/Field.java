@@ -31,8 +31,9 @@ public class Field {
         GameObject bookshelf = new Bookshelf(79 + offsetX,35 + offsetY,"objects/BookShelf.png");
         GameObject couch = new Couch(92 + offsetX, 171 + offsetY, "objects/couch.png");
         GameObject plant = new Plant(480 + offsetX, 42 + offsetY ,"objects/Plant.png");
+        GameObject weed = new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png");
 
-        objects = new GameObject[] {table,bookshelf,couch,plant};
+        objects = new GameObject[] {table,bookshelf,couch,plant, weed};
     }
 
     //Desenha o fundo, sala e os objetos contidos no array

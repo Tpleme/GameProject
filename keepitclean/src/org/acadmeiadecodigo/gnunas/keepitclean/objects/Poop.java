@@ -9,9 +9,9 @@ public class Poop extends GameObject implements Interactable {
     private Cat cat;
 
     public Poop(Cat cat) {
+        super(cat.getImageX(), cat.getImageY() , "GameObject/poop.png");
         this.cat = cat;
-        poop = new Picture(cat.getImageX(), cat.getImageY() , "GameObject/poop.png");
-        poop.draw();
+        this.draw();
     }
 
     @Override

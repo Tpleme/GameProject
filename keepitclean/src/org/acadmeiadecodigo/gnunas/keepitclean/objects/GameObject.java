@@ -21,6 +21,10 @@ public abstract class GameObject {
         this.maxY = objectPicture.getMaxY();
     }
 
+    public GameObject() {
+
+    }
+
     public void delete(){objectPicture.delete();}
 
     public void draw(){

@@ -119,7 +119,7 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
             return Direction.RIGHT;
         }
 
-        return Direction.NONE;
+        return Direction.SIT;
     }
 
 
@@ -181,7 +181,7 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
             interacting=false;
         }
 
-        if(direction== Direction.NONE){
+        if(direction== Direction.SIT){
             moving = false;
         }
     }
