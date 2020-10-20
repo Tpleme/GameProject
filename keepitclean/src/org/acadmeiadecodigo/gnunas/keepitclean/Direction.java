@@ -11,7 +11,6 @@ public enum Direction {
     DIAGONAL_UP_RIGHT,
     SIT;
 
-
     public Direction opposite(){
 
         Direction oppositeDirection = Direction.SIT;
