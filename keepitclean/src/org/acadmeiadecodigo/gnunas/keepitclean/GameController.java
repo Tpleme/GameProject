@@ -14,8 +14,6 @@ public class GameController implements KeyboardHandler {
         loadKboardConfig();
 
 
-
-
     }
 
     @Override
