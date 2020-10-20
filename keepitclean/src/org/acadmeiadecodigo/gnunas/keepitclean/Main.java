@@ -3,12 +3,17 @@ package org.acadmeiadecodigo.gnunas.keepitclean;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException{
-        Game game = new Game();
+    public static void main(String[] args){
 
-        game.init();
+        try {
+            Game game = new Game();
 
-        game.start();
+            game.init();
 
+            game.start();
+        }
+        catch (InterruptedException interruptedException){
+            System.out.println(interruptedException.getMessage());
+        }
     }
 }
