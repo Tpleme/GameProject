@@ -1,6 +1,7 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
@@ -20,6 +21,7 @@ public class Player extends Character {
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
     private Level level;
+    private int poopsPickedUp = 0;
 
     public Player(Level level) {
         playerImage = new Picture(500, 500, "Character/CharacterFront.png");
@@ -61,8 +63,23 @@ public class Player extends Character {
             if((playerImage.getMaxX()-15 >= go.getX() && playerImage.getMaxY()-15 >= go.getY()) && (playerImage.getX()+15 <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
                 System.out.println("Collision " + go.toString());
 
-                if(go instanceof Interactable)
-                    ((Interactable) go).interact();
+                if(go instanceof Interactable) {
+                    if (go.getName().equals("Poop")){
+                        poopsPickedUp += 100;
+                        Game.updateScore();
+                        go.delete();
+                        go = null;
+                        level.getField().getObjects().remove(go);
+                        return;
+                    }
+                    if (go.getName().equals("Weed")){
+                        ((Interactable) go).interact();
+                        go.delete();
+                        go = null;
+                        level.getField().getObjects().remove(go);
+                        return;
+                    }
+                }
 
                 //pequeno bounce para que nao continue a registar como collided
                 if(movingUp){playerImage.translate(0,2);}
@@ -78,6 +95,7 @@ public class Player extends Character {
             }
         }
     }
+
 
     public void checkMovement() {
         if (kbPlayerHandler.isMoving()) {
@@ -159,4 +177,7 @@ public class Player extends Character {
 
     }
 
+    public int getPoopsPickedUp() {
+        return poopsPickedUp;
+    }
 }

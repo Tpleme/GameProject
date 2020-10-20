@@ -2,6 +2,7 @@ package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
 
 import java.util.LinkedList;
@@ -16,10 +17,10 @@ public class Cat extends Character {
     private LinkedList<Direction> list;
     private final int MIN = 100;
     private final int MAX = 300;
+    private Level level;
 
-
-    public Cat() {
-
+    public Cat(Level level) {
+        this.level = level;
         list = new LinkedList<>();
         catImage = new Picture(500, 500, "Character/Cat_the_Cat_Right.png");
         catImage.draw();
@@ -30,7 +31,7 @@ public class Cat extends Character {
         for (int i = 0; i < counter; i++) {
             Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
             list.add(dir);
-            System.out.println(dir);
+            //System.out.println(dir);
 
             if(dir == Direction.SIT) {
                 poop();
@@ -38,7 +39,7 @@ public class Cat extends Character {
 
             for (int j = 0; j < (Math.random() * (MAX - MIN) + MIN); j++) {
                 move(dir);
-                System.out.println("cat moving" + " " + dir + " " + i);
+                //System.out.println("cat moving" + " " + dir + " " + i);
             }
         }
     }
@@ -108,8 +109,7 @@ public class Cat extends Character {
     }
 
     public void poop() {
-        System.out.println("PPPPPOOOOOOPPED");
-        new Poop(this);
+        level.getField().getObjects().add(new Poop(this));
     }
 
     public int getImageX() {

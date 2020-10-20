@@ -3,21 +3,19 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Weed extends GameObject implements Interactable{
 
-
-        Picture weedImage;
-        boolean pickup;
-        int choice;
-
+        private Picture weedImage;
+        private boolean pickup;
+        private int choice;
 
     public Weed(int xPos , int yPos, String reference) {
 
-        super(xPos, yPos, reference);
-
+        super(xPos, yPos, "Weed", reference);
     }
-
 
         @Override
         public void interact() {
+
+            System.out.println("Interacting with " + name);
 
             pickup = true;
             choice = (int) (Math.random() * 2);

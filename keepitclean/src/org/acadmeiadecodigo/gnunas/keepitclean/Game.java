@@ -3,18 +3,16 @@ package org.acadmeiadecodigo.gnunas.keepitclean;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Player;
-import org.acadmeiadecodigo.gnunas.keepitclean.objects.Weed;
 
 public class Game {
 
     private Level level;
-    private Player player;
+    private static Player player;
     private Cat cat;
-    private int score;
+    private static Text txt;
     public static GameState currentState;
     public static SelectedOption currentOption ;
 
@@ -27,11 +25,14 @@ public class Game {
     }
 
     public void showScore() {
-
-        Text txt = new Text(100, 50, "Score...");
-        txt.grow(50, 25);
+        txt = new Text(100, 50, "0");
+        txt.grow(20, 50);
         txt.setColor(Color.RED);
         txt.draw();
+    }
+
+    public static void updateScore(){
+        txt.setText(String.valueOf(player.getPoopsPickedUp()));
     }
 
 
@@ -81,12 +82,9 @@ public class Game {
     public void start(){
         level = new Level();
         player = new Player(level);
-        cat = new Cat();
+        cat = new Cat(level);
         showScore();
-
         cat.move();
-
-
     }
 
 

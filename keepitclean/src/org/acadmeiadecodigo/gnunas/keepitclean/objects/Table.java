@@ -1,14 +1,9 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
-public class Table extends GameObject implements Interactable{
+public class Table extends GameObject {
 
-    public Table(int x, int y, String reference){
-       super(x, y, reference);
+    public Table(int x, int y, String name, String reference){
+       super(x, y, name, reference);
 
-    }
-
-    @Override
-    public void interact() {
-        System.out.println("Interacting");
     }
 }

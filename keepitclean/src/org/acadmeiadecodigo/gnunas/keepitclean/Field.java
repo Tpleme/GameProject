@@ -4,7 +4,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.*;
 
-import java.sql.Time;
+import java.util.LinkedList;
 
 public class Field {
     private int height;
@@ -12,28 +12,28 @@ public class Field {
     public static final int PADDING=10;
     private int offsetX;
     private int offsetY;
-    private GameObject[] objects;
+    private LinkedList<GameObject> objects;
     private Rectangle screen;
     private Picture background;
 
     public Field(int width, int height){
+        objects = new LinkedList<>();
         this.height = height;
         this.width = width;
         offsetX = (width / 8) + PADDING;
         offsetY = (height / 8) + PADDING;
-        fillObjArr();
+        fillObjList();
     }
 
     //Instancia os GameObjects desta sala e guarda-os num array de GameObjects
-    private void fillObjArr(){
+    private void fillObjList(){
 
-        GameObject table = new Table(696 + offsetX,206 + offsetY,"objects/Table.png");
-        GameObject bookshelf = new Bookshelf(79 + offsetX,35 + offsetY,"objects/BookShelf.png");
-        GameObject couch = new Couch(92 + offsetX, 200 + offsetY, "objects/couch.png");
-        GameObject plant = new Plant(480 + offsetX, 42 + offsetY ,"objects/Plant.png");
-        GameObject weed = new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png");
+        objects.add(new Table(696 + offsetX,206 + offsetY, "Table","objects/Table.png"));
+        objects.add(new Bookshelf(79 + offsetX,35 + offsetY,"Bookshelf","objects/BookShelf.png"));
+        objects.add(new Couch(92 + offsetX, 200 + offsetY, "Couch" , "objects/couch.png"));
+        objects.add(new Plant(480 + offsetX, 42 + offsetY, "Plant" ,"objects/Plant.png"));
+        //objects.add(new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png"));
 
-        objects = new GameObject[] {table,bookshelf,couch,plant, weed};
     }
 
     //Desenha o fundo, sala e os objetos contidos no array
@@ -64,7 +64,7 @@ public class Field {
         return background;
     }
 
-    public GameObject[] getObjects() {
+    public LinkedList<GameObject> getObjects() {
         return objects;
     }
 
