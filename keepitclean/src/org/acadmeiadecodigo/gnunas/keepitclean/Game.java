@@ -15,6 +15,7 @@ public class Game {
     private static Text txt;
     public static GameState currentState;
     public static SelectedOption currentOption ;
+    private static int score;
 
 
     public Game() {
@@ -31,8 +32,9 @@ public class Game {
         txt.draw();
     }
 
-    public static void updateScore(){
-        txt.setText(String.valueOf(player.getPoopsPickedUp()));
+    public static void updateScore(int value){
+        score += value;
+        txt.setText(String.valueOf(score));
     }
 
 
@@ -84,7 +86,7 @@ public class Game {
         player = new Player(level);
         cat = new Cat(level);
         showScore();
-        cat.move();
+        //cat.move();
     }
 
 

@@ -1,5 +1,6 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
+import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 
 public class Poop extends GameObject implements Interactable {
@@ -11,6 +12,7 @@ public class Poop extends GameObject implements Interactable {
 
     @Override
     public void interact() {
-        System.out.println("Interacting with " + name);
+        Game.updateScore(100);
+        System.out.println("score increase by 100");
     }
 }

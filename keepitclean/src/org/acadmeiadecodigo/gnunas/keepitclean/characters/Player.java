@@ -21,7 +21,6 @@ public class Player extends Character {
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
     private Level level;
-    private int poopsPickedUp = 0;
 
     public Player(Level level) {
         playerImage = new Picture(500, 500, "Character/CharacterFront.png");
@@ -65,11 +64,10 @@ public class Player extends Character {
 
                 if(go instanceof Interactable) {
                     if (go.getName().equals("Poop")){
-                        poopsPickedUp += 100;
-                        Game.updateScore();
+                        ((Interactable) go).interact();
                         go.delete();
-                        go = null;
                         level.getField().getObjects().remove(go);
+                        go = null;
                         return;
                     }
                     if (go.getName().equals("Weed")){
@@ -172,12 +170,6 @@ public class Player extends Character {
                     playerImage.load("Character/CharacterLeft.png");
                 }
                 break;
-
         }
-
-    }
-
-    public int getPoopsPickedUp() {
-        return poopsPickedUp;
     }
 }

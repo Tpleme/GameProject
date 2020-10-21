@@ -32,7 +32,7 @@ public class Field {
         objects.add(new Bookshelf(79 + offsetX,35 + offsetY,"Bookshelf","objects/BookShelf.png"));
         objects.add(new Couch(92 + offsetX, 200 + offsetY, "Couch" , "objects/couch.png"));
         objects.add(new Plant(480 + offsetX, 42 + offsetY, "Plant" ,"objects/Plant.png"));
-        //objects.add(new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png"));
+        objects.add(new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png"));
 
     }
 

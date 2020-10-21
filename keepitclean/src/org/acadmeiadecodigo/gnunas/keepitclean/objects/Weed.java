@@ -1,9 +1,7 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.objects;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Weed extends GameObject implements Interactable{
 
-        private Picture weedImage;
         private boolean pickup;
         private int choice;
 
@@ -27,11 +25,6 @@ public class Weed extends GameObject implements Interactable{
                 badTrip();
             }
         }
-
-    @Override
-    public void delete() {
-        weedImage.delete();
-    }
 
     public void goodTrip() {
 

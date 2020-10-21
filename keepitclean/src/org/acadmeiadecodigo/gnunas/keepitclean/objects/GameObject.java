@@ -23,15 +23,12 @@ public abstract class GameObject {
         this.maxY = objectPicture.getMaxY();
     }
 
-    public GameObject() {
-
-    }
-
     public String getName() {
         return name;
     }
 
     public void delete(){
+
         objectPicture.delete();
     }
 
