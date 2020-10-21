@@ -86,7 +86,7 @@ public class Game {
         player = new Player(level);
         cat = new Cat(level);
         showScore();
-        //cat.move();
+        cat.move();
     }
 
 

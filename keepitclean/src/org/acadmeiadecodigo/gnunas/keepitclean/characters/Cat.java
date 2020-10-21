@@ -1,10 +1,9 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
-
 import java.util.LinkedList;
 
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
@@ -26,26 +25,118 @@ public class Cat extends Character {
         catImage.draw();
     }
 
-    public void move() {
+    public void checkCollisions() {
+
+        if (catImage.getX() + 10 <= level.getField().getBackground().getX()) {
+            System.out.println("Collision Left");
+            //collision = true;
+            move(Direction.RIGHT);
+        }
+
+        if (catImage.getMaxY() >= level.getField().getBackground().getMaxY()) {
+            System.out.println("Collision Down");
+            //collision = true;
+            move(Direction.UP);
+
+        }
+
+        if (catImage.getY() <= level.getField().getBackground().getY() + 60) {
+            System.out.println("Collision Top");
+            //collision = true;
+            move(Direction.DOWN);
+
+
+        }
+
+        if (catImage.getMaxX() - 10 >= level.getField().getBackground().getMaxX()) {
+            System.out.println("Collision Right");
+            //collision = true;
+            move(Direction.LEFT);
+
+
+        }
+
+        for (GameObject go : level.getField().getObjects()) {
+
+            //pequeno bounce para que nao continue a registar como collided
+                /*if(movingUp) {catImage.translate(0,2);}
+                if(movingDown){catImage.translate(0,-2);}
+                if(movingRight){catImage.translate(-2,0);}
+                if(movingLeft){catImage.translate(2,0);}
+
+
+                canMoveUp = !movingUp;
+                canMoveDown = !movingDown;
+                canMoveRight = !movingRight;
+                canMoveLeft = !movingLeft;*/
+
+            if(catImage.getMaxX() >= go.getX()) {
+                System.out.println("Collision " + go.toString());
+
+                //collision = true;
+                move(Direction.LEFT);
+                return;
+            }
+
+            if(catImage.getMaxY() >= go.getY()) {
+                System.out.println("Collision " + go.toString());
+
+                //collision = true;
+                move(Direction.UP);
+                return;
+
+            }
+            if(catImage.getX() <= go.getMaxX()) {
+                System.out.println("Collision " + go.toString());
+
+                //collision = true;
+                move(Direction.RIGHT);
+                return;
+
+            }
+            if(catImage.getY() <= go.getMaxY()) {
+                System.out.println("Collision " + go.toString());
+
+                //collision = true;
+                move(Direction.DOWN);
+                return;
+
+            }
+
+        }
+    }
+
+    public void poop() {
+        level.getField().getObjects().add(new Poop(this));
+    }
+
+    public void move () {
 
         for (int i = 0; i < counter; i++) {
             Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
             list.add(dir);
-            //System.out.println(dir);
+            System.out.println(dir);
 
-            if(dir == Direction.SIT) {
+            if (dir == Direction.SIT) {
                 poop();
             }
 
-            for (int j = 0; j < (Math.random() * (MAX - MIN) + MIN); j++) {
+            int numOfMoves = (int) (Math.random() * (MAX - MIN) + MIN);
+
+            for (int j = 0; j < numOfMoves; j++) {
                 move(dir);
-                //System.out.println("cat moving" + " " + dir + " " + i);
+                checkCollisions();
+                        /*if (collision) {
+                            numOfMoves = 0; //condição de saida para o segundo for( j)
+                        }*/
+                System.out.println("cat moving" + " " + dir + " " + i);
             }
         }
     }
 
     @Override
-    public void move(Direction direction) {
+    public void move (Direction direction){
+
 
         switch (direction) {
             case UP:
@@ -108,16 +199,12 @@ public class Cat extends Character {
         }
     }
 
-    public void poop() {
-        level.getField().getObjects().add(new Poop(this));
+    public int getImageX () {
+        return catImage.getMaxX();
     }
 
-    public int getImageX() {
-        return catImage.getX() + 32;
-    }
-
-    public int getImageY() {
-        return catImage.getY() + 32;
+    public int getImageY () {
+        return catImage.getMaxY();
     }
 
 }
