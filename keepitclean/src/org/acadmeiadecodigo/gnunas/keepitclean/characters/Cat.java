@@ -84,9 +84,6 @@ public class Cat extends Character {
             if(catImage.getMaxX() >= go.getX()) {
                 System.out.println("Collision " + go.toString());
 
-                if(go instanceof Interactable)
-                    ((Interactable) go).interact();
-
                 //collision = true;
                 move(Direction.LEFT);
                 return;
@@ -94,9 +91,6 @@ public class Cat extends Character {
 
             if(catImage.getMaxY() >= go.getY()) {
                 System.out.println("Collision " + go.toString());
-
-                if(go instanceof Interactable)
-                    ((Interactable) go).interact();
 
                 //collision = true;
                 move(Direction.UP);
@@ -106,9 +100,6 @@ public class Cat extends Character {
             if(catImage.getX() <= go.getMaxX()) {
                 System.out.println("Collision " + go.toString());
 
-                if(go instanceof Interactable)
-                    ((Interactable) go).interact();
-
                 //collision = true;
                 move(Direction.RIGHT);
                 return;
@@ -116,9 +107,6 @@ public class Cat extends Character {
             }
             if(catImage.getY() <= go.getMaxY()) {
                 System.out.println("Collision " + go.toString());
-
-                if(go instanceof Interactable)
-                    ((Interactable) go).interact();
 
                 //collision = true;
                 move(Direction.DOWN);
