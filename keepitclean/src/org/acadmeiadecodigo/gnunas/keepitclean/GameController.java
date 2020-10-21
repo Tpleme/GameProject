@@ -18,7 +18,6 @@ public class GameController implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-
         if(Game.currentState != GameState.PLAYING) {
 
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
@@ -38,7 +37,10 @@ public class GameController implements KeyboardHandler {
                 }
 
                 if (Game.currentOption == Game.SelectedOption.PLAY) {
-                    Game.currentState = GameState.PLAYING;
+
+                        Game.currentState = GameState.PLAYING;
+
+
                 }
 
 

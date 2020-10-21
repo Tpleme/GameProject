@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Player;
@@ -17,9 +18,11 @@ public class Game {
     private int score;
     public static GameState currentState;
     public static SelectedOption currentOption ;
-
+    private GameController menuController = new GameController();
 
     public Game() {
+
+
 
         currentState = GameState.MAINMENU;
         currentOption = SelectedOption.PLAY;
@@ -41,14 +44,14 @@ public class Game {
         Rectangle arrow = new Rectangle(430,270,64,64);
         arrow.fill();
         SelectedOption current = currentOption;
-        GameController menuController = new GameController();
+
 
         while (currentState == GameState.MAINMENU || currentState == GameState.INSTRUCTIONS) {
 
             if(currentOption != current){
 
                 if (currentOption == SelectedOption.PLAY){
-                    arrow.delete();
+                   // arrow.delete();
                     arrow = new Rectangle(430,270,64,64);
                     arrow.fill();
                 }
@@ -69,6 +72,7 @@ public class Game {
 
             Thread.sleep(50);
         }
+        arrow.delete();
 
         menu.delete();
 
@@ -77,6 +81,38 @@ public class Game {
         }*/
 
     }
+
+
+
+    public void plot () throws InterruptedException {
+
+
+        Picture menu = new Picture(170,100, "menus/tinder.png");
+        menu.draw();
+        Thread.sleep(4000);
+        menu.delete();
+
+        Picture menu2 = new Picture(170,100, "menus/superlike.png");
+        menu2.draw();
+        Thread.sleep(4000);
+        menu2.delete();
+
+        Picture menu3 = new Picture(170,100, "menus/answer.png");
+        menu3.draw();
+        Thread.sleep(6000);
+        menu3.delete();
+
+        Picture menu4 = new Picture(170,100,"menus/oops.png");
+        menu4.draw();
+        Thread.sleep(6000);
+        menu4.delete();
+
+
+
+
+    }
+
+
 
     public void start(){
         level = new Level();

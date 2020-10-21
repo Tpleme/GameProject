@@ -22,7 +22,7 @@ public class Main {
             Game game = new Game();
 
             game.init();
-
+            game.plot();
             game.start();
         }
         catch (InterruptedException interruptedException){
