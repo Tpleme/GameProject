@@ -81,7 +81,7 @@ public class Game {
     public void start(){
         level = new Level();
         player = new Player(level);
-        cat = new Cat();
+        cat = new Cat(level);
         showScore();
 
         cat.move();
