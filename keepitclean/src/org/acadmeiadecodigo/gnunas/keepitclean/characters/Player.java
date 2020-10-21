@@ -7,6 +7,9 @@ import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 
+import java.util.Objects;
+import java.util.Timer;
+
 public class Player extends Character {
 
     private KeyboardPlayerHandler kbPlayerHandler;
@@ -20,6 +23,7 @@ public class Player extends Character {
     private boolean canMoveDown = true;
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
+    private boolean reversed = false;
     private int speed;
     private Level level;
 
@@ -33,8 +37,7 @@ public class Player extends Character {
 
 
     public void reversekbConfiguration(){
-        kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getDown(), PlayerKey.KEY.getUp(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getSpace());
-        kbPlayerHandler.loadKboardConfig();
+        reversed = true;
     }
 
     public void kbConfiguration(){
@@ -69,20 +72,26 @@ public class Player extends Character {
             if((playerImage.getMaxX()-15 >= go.getX() && playerImage.getMaxY()-15 >= go.getY()) && (playerImage.getX()+15 <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
                 System.out.println("Collision " + go.toString());
 
+                if(reversed){
+                canMoveUp = false;
+                canMoveDown = false;
+                canMoveRight = false;
+                canMoveLeft = false;
+                return;
+                }
+
                 if(go instanceof Interactable) {
                     if (go.getName().equals("Poop")){
                         ((Interactable) go).interact();
                         go.delete();
                         level.getField().getObjects().remove(go);
-                        go = null;
                         return;
                     }
                     if (go.getName().equals("Weed")){
-                        reversekbConfiguration();
                         ((Interactable) go).interact();
                         go.delete();
-                        go = null;
                         level.getField().getObjects().remove(go);
+                        reversekbConfiguration();
                         return;
                     }
                 }
@@ -92,6 +101,7 @@ public class Player extends Character {
                 if(movingDown){playerImage.translate(0,-2);}
                 if(movingRight){playerImage.translate(-2,0);}
                 if(movingLeft){playerImage.translate(2,0);}
+
 
                 canMoveUp = !movingUp;
                 canMoveDown = !movingDown;
@@ -130,8 +140,13 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = false;
                     movingLeft = false;
-                    playerImage.translate(0, speed);
-                    playerImage.load("Character/CharacterFront.png");
+                    if(!reversed) {
+                        playerImage.translate(0, speed);
+                        playerImage.load("Character/CharacterFront.png");
+                        break;
+                    }
+                    playerImage.translate(0, -speed);
+                    playerImage.load("Character/CharacterBack.png");
                 }
                 break;
 
@@ -145,10 +160,16 @@ public class Player extends Character {
                     movingUp = true;
                     movingRight = false;
                     movingLeft = false;
-                    playerImage.translate(0, -speed);
-                    playerImage.load("Character/CharacterBack.png");
+                    if(!reversed) {
+                        playerImage.translate(0, -speed);
+                        playerImage.load("Character/CharacterBack.png");
+                        break;
+                    }
+                    playerImage.translate(0, speed);
+                    playerImage.load("Character/CharacterFront.png");
                 }
                 break;
+
             case RIGHT:
                 if (canMoveRight) {
                     canMoveDown = true;
@@ -159,8 +180,13 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = true;
                     movingLeft = false;
-                    playerImage.translate(speed, 0);
-                    playerImage.load("Character/CharacterRight.png");
+                    if(!reversed) {
+                        playerImage.translate(speed, 0);
+                        playerImage.load("Character/CharacterRight.png");
+                        break;
+                    }
+                    playerImage.translate(-speed, 0);
+                    playerImage.load("Character/CharacterLeft.png");
                 }
                 break;
 
@@ -174,8 +200,13 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = false;
                     movingLeft = true;
-                    playerImage.translate(-speed, 0);
-                    playerImage.load("Character/CharacterLeft.png");
+                    if(!reversed) {
+                        playerImage.translate(-speed, 0);
+                        playerImage.load("Character/CharacterLeft.png");
+                        break;
+                    }
+                    playerImage.translate(speed, 0);
+                    playerImage.load("Character/CharacterRight.png");
                 }
                 break;
         }

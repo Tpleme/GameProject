@@ -87,11 +87,11 @@ public class Game {
         cat = new Cat(level);
         showScore();
 
-        try {
+       /* try {
             cat.move();
         }catch (InterruptedException interruptedException){
             System.out.println(interruptedException.getMessage());
-        }
+        }*/
     }
 
 
