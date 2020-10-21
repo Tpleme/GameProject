@@ -86,7 +86,12 @@ public class Game {
         player = new Player(level);
         cat = new Cat(level);
         showScore();
-        cat.move();
+
+        try {
+            cat.move();
+        }catch (InterruptedException interruptedException){
+            System.out.println(interruptedException.getMessage());
+        }
     }
 
 

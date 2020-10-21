@@ -17,6 +17,7 @@ public class Cat extends Character {
     private final int MIN = 100;
     private final int MAX = 300;
     private Level level;
+    private boolean collided = false;
 
     public Cat(Level level) {
         this.level = level;
@@ -29,20 +30,17 @@ public class Cat extends Character {
 
         if (catImage.getX() + 10 <= level.getField().getBackground().getX()) {
             System.out.println("Collision Left");
-            //collision = true;
             move(Direction.RIGHT);
         }
 
         if (catImage.getMaxY() >= level.getField().getBackground().getMaxY()) {
             System.out.println("Collision Down");
-            //collision = true;
             move(Direction.UP);
 
         }
 
         if (catImage.getY() <= level.getField().getBackground().getY() + 60) {
             System.out.println("Collision Top");
-            //collision = true;
             move(Direction.DOWN);
 
 
@@ -50,59 +48,15 @@ public class Cat extends Character {
 
         if (catImage.getMaxX() - 10 >= level.getField().getBackground().getMaxX()) {
             System.out.println("Collision Right");
-            //collision = true;
             move(Direction.LEFT);
-
-
         }
 
         for (GameObject go : level.getField().getObjects()) {
 
-            //pequeno bounce para que nao continue a registar como collided
-                /*if(movingUp) {catImage.translate(0,2);}
-                if(movingDown){catImage.translate(0,-2);}
-                if(movingRight){catImage.translate(-2,0);}
-                if(movingLeft){catImage.translate(2,0);}
-
-
-                canMoveUp = !movingUp;
-                canMoveDown = !movingDown;
-                canMoveRight = !movingRight;
-                canMoveLeft = !movingLeft;*/
-
-            if(catImage.getMaxX() >= go.getX()) {
-                System.out.println("Collision " + go.toString());
-
-                //collision = true;
-                move(Direction.LEFT);
-                return;
+            if((catImage.getMaxX() >= go.getX() && catImage.getMaxY() >= go.getY()) && (catImage.getX() <= go.getMaxX() && catImage.getY() <= go.getMaxY())) {
+                collided = true;
+                System.out.println("Collided with " + go.getName());
             }
-
-            if(catImage.getMaxY() >= go.getY()) {
-                System.out.println("Collision " + go.toString());
-
-                //collision = true;
-                move(Direction.UP);
-                return;
-
-            }
-            if(catImage.getX() <= go.getMaxX()) {
-                System.out.println("Collision " + go.toString());
-
-                //collision = true;
-                move(Direction.RIGHT);
-                return;
-
-            }
-            if(catImage.getY() <= go.getMaxY()) {
-                System.out.println("Collision " + go.toString());
-
-                //collision = true;
-                move(Direction.DOWN);
-                return;
-
-            }
-
         }
     }
 
@@ -110,12 +64,15 @@ public class Cat extends Character {
         level.getField().getObjects().add(new Poop(this));
     }
 
-    public void move () {
+    public void move () throws InterruptedException {
 
         for (int i = 0; i < counter; i++) {
+
+            collided = false;
             Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
             list.add(dir);
-            System.out.println(dir);
+            Thread.sleep(500);
+            //System.out.println(dir);
 
             if (dir == Direction.SIT) {
                 poop();
@@ -124,14 +81,24 @@ public class Cat extends Character {
             int numOfMoves = (int) (Math.random() * (MAX - MIN) + MIN);
 
             for (int j = 0; j < numOfMoves; j++) {
-                move(dir);
+
                 checkCollisions();
-                        /*if (collision) {
-                            numOfMoves = 0; //condição de saida para o segundo for( j)
-                        }*/
-                System.out.println("cat moving" + " " + dir + " " + i);
+                System.out.println(collided);
+
+                if (collided) {
+                    move();
+                    System.out.println("asdasdasdashfsahdfkhsadkfhaskdhfkasdhfksadhfkahsdfhasdlkfhalskjdhfl");
+                    //numOfMoves = 0; //condição de saida para o segundo for( j)
+                }else{
+                    move(dir);
+                }
+                //System.out.println("cat moving" + " " + dir + " " + i);
             }
         }
+    }
+
+    public void colided(){
+
     }
 
     @Override
