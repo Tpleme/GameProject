@@ -96,7 +96,7 @@ public class Player extends Character {
         checkCollisions();
 
         switch (direction) {
-            case DOWN -> {
+            case DOWN:
                 if (canMoveDown) {
                     canMoveUp = true;
                     canMoveLeft = true;
@@ -109,8 +109,9 @@ public class Player extends Character {
                     playerImage.translate(0, 10);
                     playerImage.load("Character/CharacterFront.png");
                 }
-            }
-            case UP -> {
+                break;
+
+            case UP:
                 if (canMoveUp) {
                     canMoveDown = true;
                     canMoveRight = true;
@@ -123,8 +124,8 @@ public class Player extends Character {
                     playerImage.translate(0, -10);
                     playerImage.load("Character/CharacterBack.png");
                 }
-            }
-            case RIGHT -> {
+                break;
+            case RIGHT:
                 if (canMoveRight) {
                     canMoveDown = true;
                     canMoveUp = true;
@@ -137,8 +138,9 @@ public class Player extends Character {
                     playerImage.translate(10, 0);
                     playerImage.load("Character/CharacterRight.png");
                 }
-            }
-            case LEFT -> {
+                break;
+
+            case LEFT:
                 if (canMoveLeft) {
                     canMoveUp = true;
                     canMoveDown = true;
@@ -151,7 +153,7 @@ public class Player extends Character {
                     playerImage.translate(-10, 0);
                     playerImage.load("Character/CharacterLeft.png");
                 }
-            }
+                break;
 
         }
 
