@@ -15,6 +15,8 @@ public class Game {
     private static Text txt;
     public static GameState currentState;
     public static SelectedOption currentOption ;
+    private GameController menuController = new GameController();
+
     private static int score;
 
 
@@ -38,33 +40,54 @@ public class Game {
     }
 
 
+
     public void init() throws InterruptedException{
-        Picture menu = new Picture(0,0, "menus/menus.png");
+        Picture menu = new Picture(0,0, "menus/menu.png");
         menu.draw();
-        Rectangle arrow = new Rectangle(430,270,64,64);
-        arrow.fill();
+        Picture heart = new Picture(30,245,"menus/heart.png");
+        heart.draw();
+
         SelectedOption current = currentOption;
-        GameController menuController = new GameController();
+
 
         while (currentState == GameState.MAINMENU || currentState == GameState.INSTRUCTIONS) {
+
+
+            if(GameState.INSTRUCTIONS == currentState){
+                instructions();
+                Thread.sleep(7000);
+                currentState = GameState.MAINMENU;
+                currentOption= SelectedOption.PLAY;
+               init();
+            }
 
             if(currentOption != current){
 
                 if (currentOption == SelectedOption.PLAY){
-                    arrow.delete();
-                    arrow = new Rectangle(430,270,64,64);
-                    arrow.fill();
+
+                    heart.delete();
+                    heart = new Picture(30,245,"menus/heart.png");
+
+                    heart.draw();
+
                 }
                 if (currentOption == SelectedOption.INSTRUCTIONS){
-                    arrow.delete();
-                    arrow = new Rectangle(430,360,64,64);
-                    arrow.fill();
+
+
+                    heart.delete();
+                    heart = new Picture(30,340,"menus/heart.png");
+                    heart.draw();
+
                 }
                 if (currentOption == SelectedOption.QUIT){
-                    arrow.delete();
-                    arrow = new Rectangle(430, 450,64,64);
-                    arrow.fill();
+
+                    heart.delete();
+                    heart = new Picture(30,440,"menus/heart.png");
+                    heart.draw();
+
                 }
+
+
 
             }
 
@@ -72,6 +95,7 @@ public class Game {
 
             Thread.sleep(50);
         }
+        heart.delete();
 
         menu.delete();
 
@@ -81,11 +105,52 @@ public class Game {
 
     }
 
+    public void instructions() {
+
+        Picture instructions = new Picture(0,0,"menus/instructions.png");
+        instructions.draw();
+
+
+    }
+
+
+
+    public void plot () throws InterruptedException {
+
+        Rectangle fundo = new Rectangle(0,0,1280,720);
+        fundo.setColor(Color.BLACK);
+        fundo.fill();
+        Picture menu = new Picture(170,100, "menus/tinder.png");
+
+        menu.draw();
+        Thread.sleep(1000);
+        menu.delete();
+
+        Picture menu2 = new Picture(170,100, "menus/superlike.png");
+        menu2.draw();
+        Thread.sleep(1000);
+        menu2.delete();
+
+        Picture menu3 = new Picture(170,100, "menus/answer.png");
+        menu3.draw();
+        Thread.sleep(6000);
+        menu3.delete();
+
+        Picture menu4 = new Picture(170,100,"menus/oops.png");
+        menu4.draw();
+        Thread.sleep(3000);
+        menu4.delete();
+
+    }
+
+
+
     public void start(){
         level = new Level();
         player = new Player(level);
         cat = new Cat(level);
         showScore();
+
 
         try {
             cat.move();
