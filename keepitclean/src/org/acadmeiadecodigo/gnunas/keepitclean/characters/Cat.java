@@ -146,7 +146,7 @@ public class Cat extends Character {
                 catImage.load("Character/Cat_the_Cat_LEFT.png");
                 break;
 
-            /*case DIAGONAL_DOWN_RIGHT:
+            case DIAGONAL_DOWN_RIGHT:
                 catImage.translate(1, 1);
                 catImage.load("Character/Cat_the_Cat_Right.png");
                 break;
@@ -164,7 +164,7 @@ public class Cat extends Character {
             case DIAGONAL_UP_LEFT:
                 catImage.translate(-1, -1);
                 catImage.load("Character/Cat_the_Cat_LEFT.png");
-                break;*/
+                break;
 
             case SIT:
                 catImage.translate(0, 0); // TEMP IMAGE
