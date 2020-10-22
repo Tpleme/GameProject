@@ -8,6 +8,7 @@ public class Main {
 
         Sound sound = new Sound("/resources/Sound/ArcadeKid.wav");
         sound.play(true);
+        sound.loopIndef();
 
         try {
 

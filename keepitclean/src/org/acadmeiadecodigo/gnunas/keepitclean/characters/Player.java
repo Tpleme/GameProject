@@ -1,6 +1,7 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
@@ -19,14 +20,21 @@ public class Player extends Character {
     private boolean canMoveDown = true;
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
+    private int speed;
     private Level level;
 
     public Player(Level level) {
         playerImage = new Picture(500, 500, "Character/CharacterFront.png");
         this.level = level;
-
+        speed = 10;
         kbConfiguration();
         playerImage.draw();
+    }
+
+
+    public void reversekbConfiguration(){
+        kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getDown(), PlayerKey.KEY.getUp(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getSpace(),PlayerKey.KEY.getQ());
+        kbPlayerHandler.loadKboardConfig();
     }
 
     public void kbConfiguration(){
@@ -61,8 +69,23 @@ public class Player extends Character {
             if((playerImage.getMaxX()-15 >= go.getX() && playerImage.getMaxY()-15 >= go.getY()) && (playerImage.getX()+15 <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
                 System.out.println("Collision " + go.toString());
 
-                if(go instanceof Interactable)
-                    ((Interactable) go).interact();
+                if(go instanceof Interactable) {
+                    if (go.getName().equals("Poop")){
+                        ((Interactable) go).interact();
+                        go.delete();
+                        level.getField().getObjects().remove(go);
+                        go = null;
+                        return;
+                    }
+                    if (go.getName().equals("Weed")){
+                        reversekbConfiguration();
+                        ((Interactable) go).interact();
+                        go.delete();
+                        go = null;
+                        level.getField().getObjects().remove(go);
+                        return;
+                    }
+                }
 
                 //pequeno bounce para que nao continue a registar como collided
                 if(movingUp){playerImage.translate(0,2);}
@@ -78,6 +101,7 @@ public class Player extends Character {
             }
         }
     }
+
 
     public void checkMovement() {
         if (kbPlayerHandler.isMoving()) {
@@ -106,7 +130,7 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = false;
                     movingLeft = false;
-                    playerImage.translate(0, 10);
+                    playerImage.translate(0, speed);
                     playerImage.load("Character/CharacterFront.png");
                 }
                 break;
@@ -121,7 +145,7 @@ public class Player extends Character {
                     movingUp = true;
                     movingRight = false;
                     movingLeft = false;
-                    playerImage.translate(0, -10);
+                    playerImage.translate(0, -speed);
                     playerImage.load("Character/CharacterBack.png");
                 }
                 break;
@@ -135,7 +159,7 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = true;
                     movingLeft = false;
-                    playerImage.translate(10, 0);
+                    playerImage.translate(speed, 0);
                     playerImage.load("Character/CharacterRight.png");
                 }
                 break;
@@ -150,13 +174,10 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = false;
                     movingLeft = true;
-                    playerImage.translate(-10, 0);
+                    playerImage.translate(-speed, 0);
                     playerImage.load("Character/CharacterLeft.png");
                 }
                 break;
-
         }
-
     }
-
 }

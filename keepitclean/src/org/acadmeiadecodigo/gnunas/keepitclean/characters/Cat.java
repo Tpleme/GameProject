@@ -1,7 +1,10 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-
+import org.acadmeiadecodigo.gnunas.keepitclean.GameState;
+import org.acadmeiadecodigo.gnunas.keepitclean.Level;
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
 
 import java.util.LinkedList;
@@ -16,35 +19,108 @@ public class Cat extends Character {
     private LinkedList<Direction> list;
     private final int MIN = 100;
     private final int MAX = 300;
+    private Level level;
+    private boolean collided = false;
 
 
-    public Cat() {
-
+    public Cat(Level level) {
+        this.level = level;
         list = new LinkedList<>();
         catImage = new Picture(500, 500, "Character/Cat_the_Cat_Right.png");
         catImage.draw();
     }
 
-    public void move() {
+  public void checkCollisions() {
 
-        for (int i = 0; i < counter; i++) {
-            Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
-            list.add(dir);
-            System.out.println(dir);
+      if (catImage.getX() <= level.getField().getBackground().getX() + 5) {
+          System.out.println("Collision Left");
+          move(Direction.RIGHT);
+          collided = true;
+          return;
+      }
 
-            if(dir == Direction.SIT) {
-                poop();
-            }
+      if (catImage.getMaxY() >= level.getField().getBackground().getMaxY() - 5) {
+          System.out.println("Collision Down");
+          move(Direction.UP);
+          collided = true;
+          return;
 
-            for (int j = 0; j < (Math.random() * (MAX - MIN) + MIN); j++) {
-                move(dir);
-                System.out.println("cat moving" + " " + dir + " " + i);
+      }
+
+      if (catImage.getY() <= level.getField().getBackground().getY() + 80) {
+          System.out.println("Collision Top");
+          move(Direction.DOWN);
+          collided = true;
+          return;
+
+      }
+
+      if (catImage.getMaxX() >= level.getField().getBackground().getMaxX() - 5) {
+          System.out.println("Collision Right");
+          move(Direction.LEFT);
+          collided = true;
+          return;
+
+      }
+  }
+
+    public void checkCollisionsObjects() {
+        for (GameObject go : level.getField().getObjects()) {
+
+            if (!(go instanceof Interactable) && (catImage.getMaxX() >= go.getX()+5 && catImage.getMaxY() >= go.getY()+5) && (catImage.getX() <= go.getMaxX()-5 && catImage.getY() <= go.getMaxY()-5)) {
+                System.out.println("Collided with " + go.getName());
+                move(list.getLast().opposite());
+                collided = true;
             }
         }
     }
 
+      public void poop() {
+          level.getField().getObjects().add(new Poop(this));
+      }
+
+
+      public Direction getDirection() {
+          Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
+          return dir;
+      }
+
+      public void move () throws InterruptedException {
+          collided = false;
+
+          for (int i = 0; i < counter; i++) {
+
+              int numOfMoves = (int) (Math.random() * (MAX - MIN) + MIN);
+              Direction dir = getDirection();
+              list.add(dir);
+              Thread.sleep(500);
+
+              if (dir == Direction.SIT) {
+
+                  numOfMoves = 0;
+                  Thread.sleep(1500);
+                  poop();
+                  System.out.println("POooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooP");
+              }
+
+              while (!collided && numOfMoves != 0) {
+
+                  move(dir);
+                  numOfMoves--;
+                  checkCollisions();
+                  checkCollisionsObjects();
+
+              }
+              collided = false;
+          }
+      }
+
+
+
+
     @Override
     public void move(Direction direction) {
+
 
         switch (direction) {
             case UP:
@@ -97,7 +173,7 @@ public class Cat extends Character {
 
             case SIT:
                 catImage.translate(0, 0); // TEMP IMAGE
-                catImage.load("Character/cat_sit_poop.png");
+                //catImage.load("Character/cat_sit_poop.png");
                 break;
 
 
@@ -107,17 +183,12 @@ public class Cat extends Character {
         }
     }
 
-    public void poop() {
-        System.out.println("PPPPPOOOOOOPPED");
-        new Poop(this);
-    }
-
     public int getImageX() {
-        return catImage.getX() + 32;
+        return catImage.getMaxX() - 20;
     }
 
     public int getImageY() {
-        return catImage.getY() + 32;
+        return catImage.getMaxY() - 20;
     }
 
 }
