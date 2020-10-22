@@ -8,7 +8,9 @@ public class Plant extends GameObject implements Interactable{
 
     @Override
     public void interact() {
-        System.out.println("Interacting with plant");
+        if(!clean) {
+            clean = true;
+        }
         this.objectPicture.load("resources/objects/Plant.png");
     }
 }

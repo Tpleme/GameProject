@@ -10,6 +10,7 @@ public abstract class GameObject {
     protected int maxX;
     protected int maxY;
     protected String name;
+    protected boolean clean;
 
     public GameObject(int x, int y, String name, String reference){
         objectPicture = new Picture(x,y,reference);
@@ -31,6 +32,10 @@ public abstract class GameObject {
 
     public void draw(){
         objectPicture.draw();
+    }
+
+    public boolean isClean() {
+        return clean;
     }
 
     public int getX() {

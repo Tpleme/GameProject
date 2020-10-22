@@ -2,11 +2,10 @@ package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
 public class Weed extends GameObject implements Interactable{
 
-        private int choice;
-
     public Weed(int xPos , int yPos, String reference) {
 
         super(xPos, yPos, "Weed", reference);
+        clean = true;
     }
 
         @Override
@@ -18,16 +17,13 @@ public class Weed extends GameObject implements Interactable{
                 badTrip();
             }
 
-
-
         }
-    public void goodTrip() {
 
+    public void goodTrip() {
         System.out.println("Good trip");
     }
 
     public void badTrip() {
-
         System.out.println("Bad trip");
     }
 }

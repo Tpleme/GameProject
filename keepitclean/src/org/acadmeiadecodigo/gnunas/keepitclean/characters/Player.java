@@ -27,9 +27,8 @@ public class Player extends Character {
     private boolean canMoveDown = true;
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
-    private boolean reversed = false;
     private boolean interacting = false;
-    private int speed;
+    public static int speed;
     private Level level;
 
     public Player(Level level) {
@@ -40,17 +39,12 @@ public class Player extends Character {
         playerImage.draw();
     }
 
-
-    public void reversekbConfiguration(){
-        reversed = true;
-    }
-
     public void kbConfiguration(){
         kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace());
         kbPlayerHandler.loadKboardConfig();
     }
 
-    public boolean interact(GameObject gameObject){
+    public void interact(GameObject gameObject){
 
         Timer timer = new Timer();
 
@@ -59,6 +53,8 @@ public class Player extends Character {
         barOutline.draw();
         filler.setColor(Color.RED);
         filler.fill();
+
+        interacting = true;
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -70,12 +66,14 @@ public class Player extends Character {
                     timer.cancel();
                     barOutline.delete();
                     filler.delete();
+                    interacting = false;
                     ((Interactable) gameObject).interact();
+                    bounce();
+                    level.win();
+
                 }
             }
         },0,100);
-
-        return true;
     }
 
     public void checkCollisions() {
@@ -104,14 +102,6 @@ public class Player extends Character {
             if((playerImage.getMaxX()-15 >= go.getX() && playerImage.getMaxY()-15 >= go.getY()) && (playerImage.getX()+15 <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
                 System.out.println("Collision " + go.toString());
 
-                if(reversed){
-                canMoveUp = false;
-                canMoveDown = false;
-                canMoveRight = false;
-                canMoveLeft = false;
-                return;
-                }
-
                 if(go instanceof Interactable) {
                     if (go.getName().equals("Poop")){
                         ((Interactable) go).interact();
@@ -123,28 +113,30 @@ public class Player extends Character {
                         ((Interactable) go).interact();
                         go.delete();
                         level.getField().getObjects().remove(go);
-                        reversekbConfiguration();
                         return;
                     }
-                    interact(go);
+                    if(!go.isClean()) {
+                        interact(go);
+                    }
                 }
 
-                //pequeno bounce para que nao continue a registar como collided
-                if(movingUp){playerImage.translate(0,2);}
-                if(movingDown){playerImage.translate(0,-2);}
-                if(movingRight){playerImage.translate(-2,0);}
-                if(movingLeft){playerImage.translate(2,0);}
-
+                bounce();
 
                 canMoveUp = !movingUp;
                 canMoveDown = !movingDown;
                 canMoveRight = !movingRight;
                 canMoveLeft = !movingLeft;
-
             }
         }
     }
 
+    public void bounce(){
+        //pequeno bounce para que nao continue a registar como collided
+        if(movingUp){playerImage.translate(0,2);}
+        if(movingDown){playerImage.translate(0,-2);}
+        if(movingRight){playerImage.translate(-2,0);}
+        if(movingLeft){playerImage.translate(2,0);}
+    }
 
     public void checkMovement() {
         if (kbPlayerHandler.isMoving()) {
@@ -175,13 +167,8 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = false;
                     movingLeft = false;
-                    if(!reversed) {
-                        playerImage.translate(0, speed);
-                        playerImage.load("Character/CharacterFront.png");
-                        break;
-                    }
-                    playerImage.translate(0, -speed);
-                    playerImage.load("Character/CharacterBack.png");
+                    playerImage.translate(0, speed);
+                    playerImage.load("Character/CharacterFront.png");
                 }
                 break;
 
@@ -195,13 +182,8 @@ public class Player extends Character {
                     movingUp = true;
                     movingRight = false;
                     movingLeft = false;
-                    if(!reversed) {
-                        playerImage.translate(0, -speed);
-                        playerImage.load("Character/CharacterBack.png");
-                        break;
-                    }
-                    playerImage.translate(0, speed);
-                    playerImage.load("Character/CharacterFront.png");
+                    playerImage.translate(0, -speed);
+                    playerImage.load("Character/CharacterBack.png");
                 }
                 break;
 
@@ -215,13 +197,8 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = true;
                     movingLeft = false;
-                    if(!reversed) {
-                        playerImage.translate(speed, 0);
-                        playerImage.load("Character/CharacterRight.png");
-                        break;
-                    }
-                    playerImage.translate(-speed, 0);
-                    playerImage.load("Character/CharacterLeft.png");
+                    playerImage.translate(speed, 0);
+                    playerImage.load("Character/CharacterRight.png");
                 }
                 break;
 
@@ -235,23 +212,11 @@ public class Player extends Character {
                     movingUp = false;
                     movingRight = false;
                     movingLeft = true;
-                    if(!reversed) {
-                        playerImage.translate(-speed, 0);
-                        playerImage.load("Character/CharacterLeft.png");
-                        break;
-                    }
-                    playerImage.translate(speed, 0);
-                    playerImage.load("Character/CharacterRight.png");
+                    playerImage.translate(-speed, 0);
+                    playerImage.load("Character/CharacterLeft.png");
                 }
                 break;
         }
-    }
-
-    private boolean stopPlayer(boolean canMove){
-
-
-
-        return false;
     }
 
     public void setInteracting(boolean interacting) {

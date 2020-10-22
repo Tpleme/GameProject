@@ -8,6 +8,9 @@ public class Trash extends GameObject implements Interactable{
 
     @Override
     public void interact() {
+        if(!clean) {
+            clean = true;
+        }
         this.objectPicture.load("resources/objects/Trash.png");
     }
 }
