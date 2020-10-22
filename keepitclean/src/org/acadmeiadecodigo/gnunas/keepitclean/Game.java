@@ -48,9 +48,9 @@ public class Game {
 
 
     public void init() throws InterruptedException{
-        Picture menu = new Picture(10,10, "menus/menu.png");
+        Picture menu = new Picture(10,10, "resources/menus/menu.png");
         menu.draw();
-        Picture heart = new Picture(30,245,"menus/heart.png");
+        Picture heart = new Picture(30,245,"resources/menus/heart.png");
         heart.draw();
 
 
@@ -75,7 +75,7 @@ public class Game {
                 if (currentOption == SelectedOption.PLAY){
 
                     heart.delete();
-                    heart = new Picture(30,245,"menus/heart.png");
+                    heart = new Picture(30,245,"resources/menus/heart.png");
 
                     heart.draw();
 
@@ -84,14 +84,14 @@ public class Game {
 
 
                     heart.delete();
-                    heart = new Picture(30,340,"menus/heart.png");
+                    heart = new Picture(30,340,"resources/menus/heart.png");
                     heart.draw();
 
                 }
                 if (currentOption == SelectedOption.QUIT){
 
                     heart.delete();
-                    heart = new Picture(30,440,"menus/heart.png");
+                    heart = new Picture(30,440,"resources/menus/heart.png");
                     heart.draw();
 
 
@@ -123,7 +123,7 @@ public class Game {
 
         public void instructions () {
 
-            Picture instructions = new Picture(10, 10, "menus/instructions.png");
+            Picture instructions = new Picture(10, 10, "resources/menus/instructions.png");
             instructions.draw();
 
 
@@ -135,23 +135,23 @@ public class Game {
             Rectangle fundo = new Rectangle(10, 10, 1280, 720);
             fundo.setColor(Color.BLACK);
             fundo.fill();
-            Picture menu = new Picture(170, 100, "menus/tinder.png");
+            Picture menu = new Picture(170, 100, "resources/menus/tinder.png");
 
             menu.draw();
             Thread.sleep(1000);
             menu.delete();
 
-            Picture menu2 = new Picture(170, 100, "menus/superlike.png");
+            Picture menu2 = new Picture(170, 100, "resources/menus/superlike.png");
             menu2.draw();
             Thread.sleep(1000);
             menu2.delete();
 
-            Picture menu3 = new Picture(170, 100, "menus/answer.png");
+            Picture menu3 = new Picture(170, 100, "resources/menus/answer.png");
             menu3.draw();
             Thread.sleep(6000);
             menu3.delete();
 
-            Picture menu4 = new Picture(170, 100, "menus/oops.png");
+            Picture menu4 = new Picture(170, 100, "resources/menus/oops.png");
             menu4.draw();
             Thread.sleep(3000);
             menu4.delete();

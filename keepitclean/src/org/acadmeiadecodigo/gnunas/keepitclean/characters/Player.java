@@ -24,7 +24,7 @@ public class Player extends Character {
     private Level level;
 
     public Player(Level level) {
-        playerImage = new Picture(500, 500, "Character/CharacterFront.png");
+        playerImage = new Picture(500, 500, "resources/Character/CharacterFront.png");
         this.level = level;
         speed = 10;
         kbConfiguration();
@@ -131,7 +131,7 @@ public class Player extends Character {
                     movingRight = false;
                     movingLeft = false;
                     playerImage.translate(0, speed);
-                    playerImage.load("Character/CharacterFront.png");
+                    playerImage.load("resources/Character/CharacterFront.png");
                 }
                 break;
 
@@ -146,7 +146,7 @@ public class Player extends Character {
                     movingRight = false;
                     movingLeft = false;
                     playerImage.translate(0, -speed);
-                    playerImage.load("Character/CharacterBack.png");
+                    playerImage.load("resources/Character/CharacterBack.png");
                 }
                 break;
             case RIGHT:
@@ -160,7 +160,7 @@ public class Player extends Character {
                     movingRight = true;
                     movingLeft = false;
                     playerImage.translate(speed, 0);
-                    playerImage.load("Character/CharacterRight.png");
+                    playerImage.load("resources/Character/CharacterRight.png");
                 }
                 break;
 
@@ -175,7 +175,7 @@ public class Player extends Character {
                     movingRight = false;
                     movingLeft = true;
                     playerImage.translate(-speed, 0);
-                    playerImage.load("Character/CharacterLeft.png");
+                    playerImage.load("resources/Character/CharacterLeft.png");
                 }
                 break;
         }
