@@ -12,20 +12,25 @@ public abstract class GameObject {
     protected int y;
     protected int maxX;
     protected int maxY;
+    protected String name;
 
-    public GameObject(int x, int y, String reference){
+    public GameObject(int x, int y, String name, String reference){
         objectPicture = new Picture(x,y,reference);
+        this.name = name;
         this.x = x;
         this.y = y;
         this.maxX = objectPicture.getMaxX();
         this.maxY = objectPicture.getMaxY();
     }
 
-    public GameObject() {
-
+    public String getName() {
+        return name;
     }
 
-    public void delete(){objectPicture.delete();}
+    public void delete(){
+
+        objectPicture.delete();
+    }
 
     public void draw(){
         objectPicture.draw();
@@ -49,7 +54,7 @@ public abstract class GameObject {
 
     @Override
     public String toString() {
-        return objectPicture.toString();
+        return name;
     }
 
 }
