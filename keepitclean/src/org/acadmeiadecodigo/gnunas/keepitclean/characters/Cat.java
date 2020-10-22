@@ -6,7 +6,7 @@ import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
-
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.Weed;
 import java.util.LinkedList;
 
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
@@ -67,7 +67,7 @@ public class Cat extends Character {
     public void checkCollisionsObjects() {
         for (GameObject go : level.getField().getObjects()) {
 
-            if (!(go instanceof Interactable) && (catImage.getMaxX() >= go.getX()+5 && catImage.getMaxY() >= go.getY()+5) && (catImage.getX() <= go.getMaxX()-5 && catImage.getY() <= go.getMaxY()-5)) {
+            if (!(go instanceof Poop) && !(go instanceof Weed)  && (catImage.getMaxX() >= go.getX()+5 && catImage.getMaxY() >= go.getY()+5) && (catImage.getX() <= go.getMaxX()-5 && catImage.getY() <= go.getMaxY()-5)) {
                 System.out.println("Collided with " + go.getName());
                 move(list.getLast().opposite());
                 collided = true;
