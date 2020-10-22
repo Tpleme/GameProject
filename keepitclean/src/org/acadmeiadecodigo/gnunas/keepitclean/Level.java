@@ -1,10 +1,10 @@
 package org.acadmeiadecodigo.gnunas.keepitclean;
 
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
-import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
 
 public class Level {
     private Field field;
+    int numberOfCleanObjects;
 
     public Level(){
         field = new Field(1280,720);
@@ -12,7 +12,8 @@ public class Level {
     }
 
     public void win(){
-        int numberOfCleanObjects = 0;
+
+        numberOfCleanObjects = 0;
 
         for(GameObject gameObject : field.getObjects()){
             if (gameObject.isClean()){
@@ -20,7 +21,7 @@ public class Level {
             }
         }
 
-        if (numberOfCleanObjects >= 6){
+        if (numberOfCleanObjects == field.getObjects().size()) {
             System.out.println("WIN");
         }
     }

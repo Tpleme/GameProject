@@ -3,14 +3,10 @@ package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
-
-
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -70,7 +66,6 @@ public class Player extends Character {
                     ((Interactable) gameObject).interact();
                     bounce();
                     level.win();
-
                 }
             }
         },0,100);
@@ -80,33 +75,30 @@ public class Player extends Character {
 
         if(playerImage.getX()+10 <= level.getField().getBackground().getX()) {
             canMoveLeft = false;
-            System.out.println("Collision Left");
         }
 
         if(playerImage.getMaxY() >= level.getField().getBackground().getMaxY()){
-            System.out.println("Collision Down");
             canMoveDown = false;
         }
 
         if (playerImage.getY() <= level.getField().getBackground().getY() + 60) {
-            System.out.println("Collision Top");
             canMoveUp = false;
         }
 
         if(playerImage.getMaxX()-10 >= level.getField().getBackground().getMaxX()){
-            System.out.println("Collision Right");
             canMoveRight = false;
         }
 
         for (GameObject go : level.getField().getObjects()) {
             if((playerImage.getMaxX()-15 >= go.getX() && playerImage.getMaxY()-15 >= go.getY()) && (playerImage.getX()+15 <= go.getMaxX() && playerImage.getY()+40 <= go.getMaxY())) {
-                System.out.println("Collision " + go.toString());
+                //System.out.println("Collision " + go.toString());
 
                 if(go instanceof Interactable) {
                     if (go.getName().equals("Poop")){
                         ((Interactable) go).interact();
                         go.delete();
                         level.getField().getObjects().remove(go);
+                        level.win();
                         return;
                     }
                     if (go.getName().equals("Weed")){
@@ -132,10 +124,10 @@ public class Player extends Character {
 
     public void bounce(){
         //pequeno bounce para que nao continue a registar como collided
-        if(movingUp){playerImage.translate(0,2);}
-        if(movingDown){playerImage.translate(0,-2);}
-        if(movingRight){playerImage.translate(-2,0);}
-        if(movingLeft){playerImage.translate(2,0);}
+        if(movingUp){playerImage.translate(0,4);}
+        if(movingDown){playerImage.translate(0,-4);}
+        if(movingRight){playerImage.translate(-4,0);}
+        if(movingLeft){playerImage.translate(4,0);}
     }
 
     public void checkMovement() {

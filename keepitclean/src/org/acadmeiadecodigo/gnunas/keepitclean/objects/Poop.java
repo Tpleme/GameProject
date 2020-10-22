@@ -15,6 +15,5 @@ public class Poop extends GameObject implements Interactable {
     @Override
     public void interact() {
         Game.updateScore(100);
-        System.out.println("score increase by 100");
     }
 }

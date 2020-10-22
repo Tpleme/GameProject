@@ -22,15 +22,11 @@ public class Game {
     public static SelectedOption currentOption ;
     private GameController menuController = new GameController();
 
-
     private static int score;
 
-
     public Game() {
-
         currentState = GameState.MAINMENU;
         currentOption = SelectedOption.PLAY;
-
     }
 
     public void showScore() {
@@ -40,12 +36,10 @@ public class Game {
         txt.draw();
     }
 
-
     public static void updateScore(int value) {
         score += value;
         txt.setText(String.valueOf(score));
     }
-
 
     public void init() throws InterruptedException{
         Picture menu = new Picture(10,10, "menus/menu.png");
@@ -53,14 +47,9 @@ public class Game {
         Picture heart = new Picture(30,245,"menus/heart.png");
         heart.draw();
 
-
         SelectedOption current = currentOption;
 
-
         while (currentState == GameState.MAINMENU || currentState == GameState.INSTRUCTIONS) {
-
-
-
 
             if(GameState.INSTRUCTIONS == currentState){
                 instructions();
@@ -76,28 +65,21 @@ public class Game {
 
                     heart.delete();
                     heart = new Picture(30,245,"menus/heart.png");
-
                     heart.draw();
-
                 }
                 if (currentOption == SelectedOption.INSTRUCTIONS){
-
 
                     heart.delete();
                     heart = new Picture(30,340,"menus/heart.png");
                     heart.draw();
-
                 }
                 if (currentOption == SelectedOption.QUIT){
 
                     heart.delete();
                     heart = new Picture(30,440,"menus/heart.png");
                     heart.draw();
-
                 }
-
             }
-
             current = currentOption;
 
             Thread.sleep(50);
@@ -105,16 +87,12 @@ public class Game {
         heart.delete();
 
         menu.delete();
-
     }
-
 
         public void instructions () {
 
             Picture instructions = new Picture(10, 10, "menus/instructions.png");
             instructions.draw();
-
-
         }
 
         public void plot () throws InterruptedException {
@@ -142,7 +120,6 @@ public class Game {
             menu4.draw();
             Thread.sleep(3000);
             menu4.delete();
-
         }
 
 
@@ -154,7 +131,6 @@ public class Game {
             player = new Player(level);
             cat = new Cat(level);
             showScore();
-
 
             Text clockTxt = new Text(1200, 50, "0:0");
             clockTxt.grow(20, 50);
@@ -173,17 +149,14 @@ public class Game {
 
                     clockTxt.setText(String.format("%d:%02d", minutes, seconds));
 
-
-                    System.out.println(minutes + ":" + seconds);
+                    //System.out.println(minutes + ":" + seconds);
 
                     if (executions == 0) {
                         timer.cancel();
                     }
                     executions--;
-
                 }
             }, 0, WAITING_TIME);
-
 
             try {
                 cat.move();

@@ -40,15 +40,12 @@ public class Cat extends Character {
       }
 
       if (catImage.getMaxY() >= level.getField().getBackground().getMaxY() - 5) {
-          System.out.println("Collision Down");
           move(Direction.UP);
           collided = true;
           return;
-
       }
 
       if (catImage.getY() <= level.getField().getBackground().getY() + 80) {
-          System.out.println("Collision Top");
           move(Direction.DOWN);
           collided = true;
           return;
@@ -56,11 +53,9 @@ public class Cat extends Character {
       }
 
       if (catImage.getMaxX() >= level.getField().getBackground().getMaxX() - 5) {
-          System.out.println("Collision Right");
           move(Direction.LEFT);
           collided = true;
           return;
-
       }
   }
 
@@ -68,7 +63,7 @@ public class Cat extends Character {
         for (GameObject go : level.getField().getObjects()) {
 
             if (!(go instanceof Poop) && !(go instanceof Weed)  && (catImage.getMaxX() >= go.getX()+5 && catImage.getMaxY() >= go.getY()+5) && (catImage.getX() <= go.getMaxX()-5 && catImage.getY() <= go.getMaxY()-5)) {
-                System.out.println("Collided with " + go.getName());
+               // System.out.println("Collided with " + go.getName());
                 move(list.getLast().opposite());
                 collided = true;
             }
@@ -100,7 +95,6 @@ public class Cat extends Character {
                   numOfMoves = 0;
                   Thread.sleep(1500);
                   poop();
-                  System.out.println("POooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooP");
               }
 
               while (!collided && numOfMoves != 0) {
@@ -172,14 +166,11 @@ public class Cat extends Character {
                 break;
 
             case SIT:
-                catImage.translate(0, 0); // TEMP IMAGE
-                //catImage.load("Character/cat_sit_poop.png");
+                catImage.translate(0, 0);
                 break;
-
 
             default:
                 throw new IllegalStateException();
-
         }
     }
 
