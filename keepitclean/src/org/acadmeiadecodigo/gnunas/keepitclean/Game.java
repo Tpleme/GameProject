@@ -39,8 +39,11 @@ public class Game {
 
 
     public void init() throws InterruptedException{
-        Picture menu = new Picture(0,0, "menus/menus.png");
+        Picture menu = new Picture(0,0, "menus/menu.png");
         menu.draw();
+        Picture heart = new Picture(430,270,"menus/heart.png");
+        heart.draw();
+
         Rectangle arrow = new Rectangle(430,270,64,64);
         arrow.fill();
         SelectedOption current = currentOption;
