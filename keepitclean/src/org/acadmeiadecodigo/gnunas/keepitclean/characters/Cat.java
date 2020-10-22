@@ -27,14 +27,13 @@ public class Cat extends Character {
     public Cat(Level level) {
         this.level = level;
         list = new LinkedList<>();
-        catImage = new Picture(500, 500, "Character/Cat_the_Cat_Right.png");
+        catImage = new Picture(500, 500, "resources/Character/Cat_the_Cat_Right.png");
         catImage.draw();
     }
 
   public void checkCollisions() {
 
       if (catImage.getX() <= level.getField().getBackground().getX() + 5) {
-          System.out.println("Collision Left");
           move(Direction.RIGHT);
           collided = true;
           return;
@@ -120,49 +119,49 @@ public class Cat extends Character {
             case UP:
                 catImage.translate(0, -1);
                 if (list.lastIndexOf(direction.RIGHT) > list.indexOf(direction.LEFT)) {
-                    catImage.load("Character/Cat_the_Cat_Right.png");
+                    catImage.load("resources/Character/Cat_the_Cat_Right.png");
                     break;
                 }
-                catImage.load("Character/Cat_the_Cat_LEFT.png");
+                catImage.load("resources/Character/Cat_the_Cat_LEFT.png");
                 break;
 
             case DOWN:
                 catImage.translate(0, 1);
                 if (list.lastIndexOf(direction.RIGHT) > list.indexOf(direction.LEFT)) {
-                    catImage.load("Character/Cat_the_Cat_Right.png");
+                    catImage.load("resources/Character/Cat_the_Cat_Right.png");
                     break;
                 }
-                catImage.load("Character/Cat_the_Cat_LEFT.png");
+                catImage.load("resources/Character/Cat_the_Cat_LEFT.png");
                 break;
 
             case RIGHT:
                 catImage.translate(1, 0);
-                catImage.load("Character/Cat_the_Cat_Right.png");
+                catImage.load("resources/Character/Cat_the_Cat_Right.png");
                 break;
 
             case LEFT:
                 catImage.translate(-1, 0);
-                catImage.load("Character/Cat_the_Cat_LEFT.png");
+                catImage.load("resources/Character/Cat_the_Cat_LEFT.png");
                 break;
 
             case DIAGONAL_DOWN_RIGHT:
                 catImage.translate(1, 1);
-                catImage.load("Character/Cat_the_Cat_Right.png");
+                catImage.load("resources/Character/Cat_the_Cat_Right.png");
                 break;
 
             case DIAGONAL_UP_RIGHT:
                 catImage.translate(1, -1);
-                catImage.load("Character/Cat_the_Cat_Right.png");
+                catImage.load("resources/Character/Cat_the_Cat_Right.png");
                 break;
 
             case DIAGONAL_DOWN_LEFT:
                 catImage.translate(-1, 1);
-                catImage.load("Character/Cat_the_Cat_LEFT.png");
+                catImage.load("resources/Character/Cat_the_Cat_LEFT.png");
                 break;
 
             case DIAGONAL_UP_LEFT:
                 catImage.translate(-1, -1);
-                catImage.load("Character/Cat_the_Cat_LEFT.png");
+                catImage.load("resources/Character/Cat_the_Cat_LEFT.png");
                 break;
 
             case SIT:

@@ -7,7 +7,7 @@ public class Poop extends GameObject implements Interactable {
 
     public Poop(Cat cat) {
 
-        super(cat.getImageX(),cat.getImageY(),"Poop","GameObject/poop.png");
+        super(cat.getImageX(),cat.getImageY(),"Poop","resources/GameObject/poop.png");
         clean = false;
         this.draw();
     }
