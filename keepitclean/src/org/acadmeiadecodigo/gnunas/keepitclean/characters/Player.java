@@ -20,7 +20,7 @@ public class Player extends Character {
     private boolean canMoveDown = true;
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
-    private int speed;
+    public static int speed;
     private Level level;
 
     public Player(Level level) {
