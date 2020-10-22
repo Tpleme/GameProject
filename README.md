@@ -1,10 +1,15 @@
 Developed at Academia de Código.
 
 Created by Code Cadets:
+
 Leandro Melo
+
 Sofia Teixeira
+
 João Pires
+
 Miguel Teixeira
+
 Paula Gómez
 
 Project development started in the 5th week of Academia de Código’s 54th bootcamp.
