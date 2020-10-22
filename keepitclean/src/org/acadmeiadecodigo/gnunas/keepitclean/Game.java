@@ -94,10 +94,7 @@ public class Game {
                     heart = new Picture(30,440,"menus/heart.png");
                     heart.draw();
 
-
                 }
-
-
 
             }
 
@@ -109,16 +106,7 @@ public class Game {
 
         menu.delete();
 
-        /*while(!gameOver){
-            play game here
-        }*/
-
     }
-
-
-
-
-
 
 
         public void instructions () {
@@ -128,7 +116,6 @@ public class Game {
 
 
         }
-
 
         public void plot () throws InterruptedException {
 

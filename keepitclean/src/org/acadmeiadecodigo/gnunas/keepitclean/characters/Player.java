@@ -1,11 +1,18 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
+
+
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends Character {
 
@@ -20,6 +27,7 @@ public class Player extends Character {
     private boolean canMoveDown = true;
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
+    private boolean interacting = false;
     public static int speed;
     private Level level;
 
@@ -31,17 +39,42 @@ public class Player extends Character {
         playerImage.draw();
     }
 
-
-    public void reversekbConfiguration(){
-        kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getDown(), PlayerKey.KEY.getUp(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getSpace(),PlayerKey.KEY.getQ());
-        kbPlayerHandler.loadKboardConfig();
-    }
-
     public void kbConfiguration(){
         kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace(),PlayerKey.KEY.getQ());
         kbPlayerHandler.loadKboardConfig();
     }
 
+    public void interact(GameObject gameObject){
+
+        Timer timer = new Timer();
+
+        Rectangle barOutline = new Rectangle(playerImage.getX() - 15 , playerImage.getY() - 30, 99, 20);
+        Rectangle filler = new Rectangle(barOutline.getX() + 50 , barOutline.getY() + 1, 0, 19);
+        barOutline.draw();
+        filler.setColor(Color.RED);
+        filler.fill();
+
+        interacting = true;
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                filler.grow(1,0);
+
+                if(filler.getX() <= barOutline.getX()) {
+                    System.out.println("in");
+                    timer.cancel();
+                    barOutline.delete();
+                    filler.delete();
+                    interacting = false;
+                    ((Interactable) gameObject).interact();
+                    bounce();
+                    level.win();
+
+                }
+            }
+        },0,100);
+    }
 
     public void checkCollisions() {
 
@@ -74,34 +107,36 @@ public class Player extends Character {
                         ((Interactable) go).interact();
                         go.delete();
                         level.getField().getObjects().remove(go);
-                        go = null;
                         return;
                     }
                     if (go.getName().equals("Weed")){
-                        reversekbConfiguration();
                         ((Interactable) go).interact();
                         go.delete();
-                        go = null;
                         level.getField().getObjects().remove(go);
                         return;
                     }
+                    if(!go.isClean()) {
+                        interact(go);
+                    }
                 }
 
-                //pequeno bounce para que nao continue a registar como collided
-                if(movingUp){playerImage.translate(0,2);}
-                if(movingDown){playerImage.translate(0,-2);}
-                if(movingRight){playerImage.translate(-2,0);}
-                if(movingLeft){playerImage.translate(2,0);}
+                bounce();
 
                 canMoveUp = !movingUp;
                 canMoveDown = !movingDown;
                 canMoveRight = !movingRight;
                 canMoveLeft = !movingLeft;
-
             }
         }
     }
 
+    public void bounce(){
+        //pequeno bounce para que nao continue a registar como collided
+        if(movingUp){playerImage.translate(0,2);}
+        if(movingDown){playerImage.translate(0,-2);}
+        if(movingRight){playerImage.translate(-2,0);}
+        if(movingLeft){playerImage.translate(2,0);}
+    }
 
     public void checkMovement() {
         if (kbPlayerHandler.isMoving()) {
@@ -116,6 +151,8 @@ public class Player extends Character {
 
     @Override
     public void move(Direction direction) {
+
+        if (interacting){return;}
 
         checkCollisions();
 
@@ -149,6 +186,7 @@ public class Player extends Character {
                     playerImage.load("Character/CharacterBack.png");
                 }
                 break;
+
             case RIGHT:
                 if (canMoveRight) {
                     canMoveDown = true;
@@ -179,5 +217,13 @@ public class Player extends Character {
                 }
                 break;
         }
+    }
+
+    public void setInteracting(boolean interacting) {
+        this.interacting = interacting;
+    }
+
+    public boolean isInteracting() {
+        return interacting;
     }
 }

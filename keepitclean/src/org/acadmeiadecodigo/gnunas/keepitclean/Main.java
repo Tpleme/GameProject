@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args){
 
-
         Sound sound = new Sound("/resources/Sound/ArcadeKid.wav");
         sound.play(true);
         sound.loopIndef();

@@ -7,28 +7,21 @@ import java.util.TimerTask;
 
 public class Weed extends GameObject implements Interactable{
 
-        private boolean pickup;
-        private int choice;
-
     public Weed(int xPos , int yPos, String reference) {
 
         super(xPos, yPos, "Weed", reference);
+        clean = true;
     }
 
         @Override
         public void interact() {
 
-            System.out.println("Interacting with " + name);
-
-            pickup = true;
-            choice = (int) (Math.random() * 2);
-
-            if ((choice == 0)) {
+            if (((int) (Math.random() * 2) == 0)) {
                 goodTrip();
-
             } else {
                 badTrip();
             }
+
             Timer weedTimer = new Timer();
             weedTimer.scheduleAtFixedRate(new TimerTask() {
 
@@ -52,12 +45,4 @@ public class Weed extends GameObject implements Interactable{
             Player.speed = 5;
             System.out.println("Bad trip");
         }
-
-        public boolean isPickup() {
-            return pickup;
-        }
-
-        public void pickUpWeed() {
-
-        }
-    }
+}
