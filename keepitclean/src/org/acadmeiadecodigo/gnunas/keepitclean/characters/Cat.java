@@ -75,7 +75,7 @@ public class Cat extends Character {
         }
     }
 
-      public void poop () {
+      public void poop() {
           level.getField().getObjects().add(new Poop(this));
       }
 
@@ -96,10 +96,15 @@ public class Cat extends Character {
               Thread.sleep(500);
 
               if (dir == Direction.SIT) {
+
+                  numOfMoves = 0;
+                  Thread.sleep(1500);
                   poop();
+                  System.out.println("POooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooP");
               }
 
               while (!collided && numOfMoves != 0) {
+
                   move(dir);
                   numOfMoves--;
                   checkCollisions();
@@ -168,7 +173,7 @@ public class Cat extends Character {
 
             case SIT:
                 catImage.translate(0, 0); // TEMP IMAGE
-                catImage.load("Character/cat_sit_poop.png");
+                //catImage.load("Character/cat_sit_poop.png");
                 break;
 
 
