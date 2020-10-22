@@ -1,9 +1,12 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.acadmeiadecodigo.gnunas.keepitclean.GameState;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
+import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Poop;
+
 import java.util.LinkedList;
 
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
@@ -19,6 +22,7 @@ public class Cat extends Character {
     private Level level;
     private boolean collided = false;
 
+
     public Cat(Level level) {
         this.level = level;
         list = new LinkedList<>();
@@ -26,83 +30,96 @@ public class Cat extends Character {
         catImage.draw();
     }
 
-    public void checkCollisions() {
+  public void checkCollisions() {
 
-        if (catImage.getX() + 10 <= level.getField().getBackground().getX()) {
-            System.out.println("Collision Left");
-            move(Direction.RIGHT);
-        }
+      if (catImage.getX() <= level.getField().getBackground().getX() + 5) {
+          System.out.println("Collision Left");
+          move(Direction.RIGHT);
+          collided = true;
+          return;
+      }
 
-        if (catImage.getMaxY() >= level.getField().getBackground().getMaxY()) {
-            System.out.println("Collision Down");
-            move(Direction.UP);
+      if (catImage.getMaxY() >= level.getField().getBackground().getMaxY() - 5) {
+          System.out.println("Collision Down");
+          move(Direction.UP);
+          collided = true;
+          return;
 
-        }
+      }
 
-        if (catImage.getY() <= level.getField().getBackground().getY() + 60) {
-            System.out.println("Collision Top");
-            move(Direction.DOWN);
+      if (catImage.getY() <= level.getField().getBackground().getY() + 80) {
+          System.out.println("Collision Top");
+          move(Direction.DOWN);
+          collided = true;
+          return;
 
+      }
 
-        }
+      if (catImage.getMaxX() >= level.getField().getBackground().getMaxX() - 5) {
+          System.out.println("Collision Right");
+          move(Direction.LEFT);
+          collided = true;
+          return;
 
-        if (catImage.getMaxX() - 10 >= level.getField().getBackground().getMaxX()) {
-            System.out.println("Collision Right");
-            move(Direction.LEFT);
-        }
+      }
+  }
 
+    public void checkCollisionsObjects() {
         for (GameObject go : level.getField().getObjects()) {
 
-            if((catImage.getMaxX() >= go.getX() && catImage.getMaxY() >= go.getY()) && (catImage.getX() <= go.getMaxX() && catImage.getY() <= go.getMaxY())) {
-                collided = true;
+            if (!(go instanceof Interactable) && (catImage.getMaxX() >= go.getX()+5 && catImage.getMaxY() >= go.getY()+5) && (catImage.getX() <= go.getMaxX()-5 && catImage.getY() <= go.getMaxY()-5)) {
                 System.out.println("Collided with " + go.getName());
+                move(list.getLast().opposite());
+                collided = true;
             }
         }
     }
 
-    public void poop() {
-        level.getField().getObjects().add(new Poop(this));
-    }
+      public void poop() {
+          level.getField().getObjects().add(new Poop(this));
+      }
 
-    public void move () throws InterruptedException {
 
-        for (int i = 0; i < counter; i++) {
+      public Direction getDirection() {
+          Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
+          return dir;
+      }
 
-            collided = false;
-            Direction dir = Direction.values()[(int) (Math.random() * Direction.values().length)];
-            list.add(dir);
-            Thread.sleep(500);
-            //System.out.println(dir);
+      public void move () throws InterruptedException {
+          collided = false;
 
-            if (dir == Direction.SIT) {
-                poop();
-            }
+          for (int i = 0; i < counter; i++) {
 
-            int numOfMoves = (int) (Math.random() * (MAX - MIN) + MIN);
+              int numOfMoves = (int) (Math.random() * (MAX - MIN) + MIN);
+              Direction dir = getDirection();
+              list.add(dir);
+              Thread.sleep(500);
 
-            for (int j = 0; j < numOfMoves; j++) {
+              if (dir == Direction.SIT) {
 
-                checkCollisions();
-                System.out.println(collided);
+                  numOfMoves = 0;
+                  Thread.sleep(1500);
+                  poop();
+                  System.out.println("POooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooP");
+              }
 
-                if (collided) {
-                    move();
-                    System.out.println("asdasdasdashfsahdfkhsadkfhaskdhfkasdhfksadhfkahsdfhasdlkfhalskjdhfl");
-                    //numOfMoves = 0; //condição de saida para o segundo for( j)
-                }else{
-                    move(dir);
-                }
-                //System.out.println("cat moving" + " " + dir + " " + i);
-            }
-        }
-    }
+              while (!collided && numOfMoves != 0) {
 
-    public void colided(){
+                  move(dir);
+                  numOfMoves--;
+                  checkCollisions();
+                  checkCollisionsObjects();
 
-    }
+              }
+              collided = false;
+          }
+      }
+
+
+
 
     @Override
-    public void move (Direction direction){
+    public void move(Direction direction) {
 
 
         switch (direction) {
@@ -156,7 +173,7 @@ public class Cat extends Character {
 
             case SIT:
                 catImage.translate(0, 0); // TEMP IMAGE
-                catImage.load("Character/cat_sit_poop.png");
+                //catImage.load("Character/cat_sit_poop.png");
                 break;
 
 
@@ -166,12 +183,12 @@ public class Cat extends Character {
         }
     }
 
-    public int getImageX () {
-        return catImage.getMaxX();
+    public int getImageX() {
+        return catImage.getMaxX() - 20;
     }
 
-    public int getImageY () {
-        return catImage.getMaxY();
+    public int getImageY() {
+        return catImage.getMaxY() - 20;
     }
 
 }

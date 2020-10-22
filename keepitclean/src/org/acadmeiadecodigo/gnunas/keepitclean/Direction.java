@@ -29,6 +29,19 @@ public enum Direction {
             case RIGHT:
                 oppositeDirection=Direction.LEFT;
                 break;
+            case DIAGONAL_DOWN_LEFT:
+                oppositeDirection=Direction.DIAGONAL_UP_RIGHT;
+                break;
+            case DIAGONAL_DOWN_RIGHT:
+                oppositeDirection= Direction.DIAGONAL_UP_LEFT;
+                break;
+            case DIAGONAL_UP_LEFT:
+                oppositeDirection=Direction.DIAGONAL_DOWN_RIGHT;
+                break;
+            case DIAGONAL_UP_RIGHT:
+                oppositeDirection=Direction.DIAGONAL_DOWN_LEFT;
+                break;
+
 
         }
 

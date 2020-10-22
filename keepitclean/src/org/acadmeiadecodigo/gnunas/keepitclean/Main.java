@@ -2,6 +2,7 @@ package org.acadmeiadecodigo.gnunas.keepitclean;
 
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +13,7 @@ public class Main {
 
         Sound sound = new Sound("/resources/Sound/ArcadeKid.wav");
         sound.play(true);
+        sound.loopIndef();
 
         try {
 
@@ -28,8 +30,7 @@ public class Main {
 
             game.init();
 
-
-
+            game.plot();
 
             game.start();
 
