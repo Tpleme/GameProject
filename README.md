@@ -2,24 +2,24 @@ Developed at Academia de Código.
 
 Created by Code Cadets:
 
-Leandro Melo
-Sofia Teixeira
-João Pires
-Miguel Teixeira
+Leandro Melo, 
+Sofia Teixeira, 
+João Pires, 
+Miguel Teixeira, 
 Paula Gómez
 
 Project development started in the 5th week of Academia de Código’s 54th bootcamp.
 Concepts learned until now:
 
-Basic Java
-Java Build Process
-Basic OOP
-Composition
-Inheritance
-Polymorphism
-Interfaces
-Simple Graphics Library
-Containers
+Basic Java, 
+Java Build Process, 
+Basic OOP, 
+Composition, 
+Inheritance, 
+Polymorphism, 
+Interfaces, 
+Simple Graphics Library, 
+Containers, 
 Nested Classes
 
 Keep It Clean
