@@ -1,8 +1,5 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
-
-
-
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class GameObject {

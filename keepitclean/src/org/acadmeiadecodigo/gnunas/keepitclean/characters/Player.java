@@ -24,6 +24,7 @@ public class Player extends Character {
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
     private boolean reversed = false;
+    private boolean interacting;
     private int speed;
     private Level level;
 
@@ -94,6 +95,7 @@ public class Player extends Character {
                         reversekbConfiguration();
                         return;
                     }
+                    ((Interactable) go).interact();
                 }
 
                 //pequeno bounce para que nao continue a registar como collided
@@ -126,6 +128,8 @@ public class Player extends Character {
 
     @Override
     public void move(Direction direction) {
+
+        if (interacting){return;}
 
         checkCollisions();
 
@@ -210,5 +214,13 @@ public class Player extends Character {
                 }
                 break;
         }
+    }
+
+    public void setInteracting(boolean interacting) {
+        this.interacting = interacting;
+    }
+
+    public boolean isInteracting() {
+        return interacting;
     }
 }

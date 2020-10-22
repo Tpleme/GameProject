@@ -28,10 +28,12 @@ public class Field {
     //Instancia os GameObjects desta sala e guarda-os num array de GameObjects
     private void fillObjList(){
 
-        objects.add(new Table(696 + offsetX,206 + offsetY, "Table","objects/Table.png"));
+        objects.add(new Table(696 + offsetX,206 + offsetY, "Table","objects/DirtTable.png"));
         objects.add(new Bookshelf(79 + offsetX,35 + offsetY,"Bookshelf","objects/BookShelf.png"));
-        objects.add(new Couch(92 + offsetX, 200 + offsetY, "Couch" , "objects/couch.png"));
-        objects.add(new Plant(480 + offsetX, 42 + offsetY, "Plant" ,"objects/Plant.png"));
+        objects.add(new Couch(92 + offsetX, 200 + offsetY, "Couch" , "objects/DirtCouch.png"));
+        objects.add(new Plant(480 + offsetX, 42 + offsetY, "Plant" ,"objects/DriedPlant.png"));
+        objects.add(new Plant(640 + offsetX, 42 + offsetY, "Plant2", "objects/DriedPlant.png"));
+        objects.add(new Trash(900 + offsetX, 450 + offsetY, "Trash", "objects/DirtTrash.png"));
         objects.add(new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png"));
 
     }
@@ -41,7 +43,7 @@ public class Field {
        screen = new Rectangle(PADDING,PADDING,width,height);
        screen.fill();
 
-       background = new Picture(offsetX,offsetY,"EmptyLivingRoom.png");
+       background = new Picture(offsetX,offsetY,"resources/livingroom2.png");
        background.draw();
 
        for (GameObject go : objects){

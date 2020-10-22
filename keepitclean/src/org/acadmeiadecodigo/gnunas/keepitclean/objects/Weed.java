@@ -2,7 +2,6 @@ package org.acadmeiadecodigo.gnunas.keepitclean.objects;
 
 public class Weed extends GameObject implements Interactable{
 
-        private boolean pickup;
         private int choice;
 
     public Weed(int xPos , int yPos, String reference) {
@@ -12,15 +11,8 @@ public class Weed extends GameObject implements Interactable{
 
         @Override
         public void interact() {
-
-            System.out.println("Interacting with " + name);
-
-            pickup = true;
-            choice = (int) (Math.random() * 2);
-
-            if ((choice == 0)) {
+            if (((int) (Math.random() * 2) == 0)) {
                 goodTrip();
-
             } else {
                 badTrip();
             }
@@ -28,19 +20,11 @@ public class Weed extends GameObject implements Interactable{
 
     public void goodTrip() {
 
-            System.out.println("Good trip");
-        }
-
-        public void badTrip() {
-
-            System.out.println("Bad trip");
-        }
-
-        public boolean isPickup() {
-            return pickup;
-        }
-
-        public void pickUpWeed() {
-
-        }
+        System.out.println("Good trip");
     }
+
+    public void badTrip() {
+
+        System.out.println("Bad trip");
+    }
+}

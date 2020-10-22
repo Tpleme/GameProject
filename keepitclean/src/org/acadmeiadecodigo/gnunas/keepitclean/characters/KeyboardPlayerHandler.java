@@ -147,9 +147,9 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
         }
 
         if(keyboardEvent.getKey()==keyList[4]){
-            System.out.println("interaçao!");
             pressedKeys[4]=true;
-            interacting=true;
+            player.setInteracting(true);
+            System.out.println(player.isInteracting());
         }
 
         direction = moveNewDirection();
@@ -178,7 +178,7 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
         }
 
         if(keyboardEvent.getKey()==keyList[4]){
-            interacting=false;
+            player.setInteracting(false);
         }
 
         if(direction== Direction.SIT){
