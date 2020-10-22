@@ -36,6 +36,13 @@ public class GameController implements KeyboardHandler {
                     Game.exit();
                 }
 
+                if(Game.currentOption == Game.SelectedOption.INSTRUCTIONS){
+                    // fazer aparecer instruções
+
+                    Game.currentState = GameState.INSTRUCTIONS;
+
+                }
+
                 if (Game.currentOption == Game.SelectedOption.PLAY) {
 
                         Game.currentState = GameState.PLAYING;
