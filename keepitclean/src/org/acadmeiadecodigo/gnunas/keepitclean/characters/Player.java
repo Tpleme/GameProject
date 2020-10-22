@@ -1,5 +1,7 @@
 package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 import org.acadmeiadecodigo.gnunas.keepitclean.Level;
@@ -7,8 +9,10 @@ import org.acadmeiadecodigo.gnunas.keepitclean.objects.GameObject;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.Interactable;
 
+
 import java.util.Objects;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends Character {
 
@@ -24,7 +28,7 @@ public class Player extends Character {
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
     private boolean reversed = false;
-    private boolean interacting;
+    private boolean interacting = false;
     private int speed;
     private Level level;
 
@@ -46,6 +50,33 @@ public class Player extends Character {
         kbPlayerHandler.loadKboardConfig();
     }
 
+    public boolean interact(GameObject gameObject){
+
+        Timer timer = new Timer();
+
+        Rectangle barOutline = new Rectangle(playerImage.getX() - 15 , playerImage.getY() - 30, 99, 20);
+        Rectangle filler = new Rectangle(barOutline.getX() + 50 , barOutline.getY() + 1, 0, 19);
+        barOutline.draw();
+        filler.setColor(Color.RED);
+        filler.fill();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                filler.grow(1,0);
+
+                if(filler.getX() <= barOutline.getX()) {
+                    System.out.println("in");
+                    timer.cancel();
+                    barOutline.delete();
+                    filler.delete();
+                    ((Interactable) gameObject).interact();
+                }
+            }
+        },0,100);
+
+        return true;
+    }
 
     public void checkCollisions() {
 
@@ -95,7 +126,7 @@ public class Player extends Character {
                         reversekbConfiguration();
                         return;
                     }
-                    ((Interactable) go).interact();
+                    interact(go);
                 }
 
                 //pequeno bounce para que nao continue a registar como collided
@@ -214,6 +245,13 @@ public class Player extends Character {
                 }
                 break;
         }
+    }
+
+    private boolean stopPlayer(boolean canMove){
+
+
+
+        return false;
     }
 
     public void setInteracting(boolean interacting) {

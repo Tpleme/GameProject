@@ -11,13 +11,16 @@ public class Weed extends GameObject implements Interactable{
 
         @Override
         public void interact() {
+
             if (((int) (Math.random() * 2) == 0)) {
                 goodTrip();
             } else {
                 badTrip();
             }
-        }
 
+
+
+        }
     public void goodTrip() {
 
         System.out.println("Good trip");
