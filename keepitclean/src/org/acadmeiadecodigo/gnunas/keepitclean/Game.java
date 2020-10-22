@@ -41,11 +41,9 @@ public class Game {
     public void init() throws InterruptedException{
         Picture menu = new Picture(0,0, "menus/menu.png");
         menu.draw();
-        Picture heart = new Picture(430,270,"menus/heart.png");
+        Picture heart = new Picture(30,130,"menus/heart.png");
         heart.draw();
 
-        Rectangle arrow = new Rectangle(430,270,64,64);
-        arrow.fill();
         SelectedOption current = currentOption;
 
 
@@ -54,19 +52,26 @@ public class Game {
             if(currentOption != current){
 
                 if (currentOption == SelectedOption.PLAY){
-                   // arrow.delete();
-                    arrow = new Rectangle(430,270,64,64);
-                    arrow.fill();
+
+                    heart.delete();
+                    heart = new Picture(30,130,"menus/heart.png");
+
+                    heart.draw();
+
                 }
                 if (currentOption == SelectedOption.INSTRUCTIONS){
-                    arrow.delete();
-                    arrow = new Rectangle(430,360,64,64);
-                    arrow.fill();
+
+                    heart.delete();
+                    heart = new Picture(30,240,"menus/heart.png");
+                    heart.draw();
+
                 }
                 if (currentOption == SelectedOption.QUIT){
-                    arrow.delete();
-                    arrow = new Rectangle(430, 450,64,64);
-                    arrow.fill();
+
+                    heart.delete();
+                    heart = new Picture(30,340,"menus/heart.png");
+                    heart.draw();
+
                 }
 
             }
@@ -75,7 +80,8 @@ public class Game {
 
             Thread.sleep(50);
         }
-        arrow.delete();
+        heart.delete();
+      
 
         menu.delete();
 
