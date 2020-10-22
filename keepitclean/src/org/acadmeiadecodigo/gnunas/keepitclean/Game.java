@@ -8,6 +8,7 @@ import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Player;
 
 import javax.management.StringValueExp;
+import java.security.cert.TrustAnchor;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -20,8 +21,9 @@ public class Game {
     private static Text txt;
     public static GameState currentState;
     public static SelectedOption currentOption ;
+    protected int timeLeft;
+    private Timer timer;
     private GameController menuController = new GameController();
-
     private static int score;
 
     public Game() {
@@ -96,6 +98,29 @@ public class Game {
             instructions.draw();
         }
 
+        public void winGame(){
+            Picture winGameScreen = new Picture(170,100, "resources/menus/gameWon.png");
+            winGameScreen.draw();
+
+            cat.setStopCat(true);
+            timer.cancel();
+
+            Text score = new Text(500,50,"Score");
+            score.draw();
+        }
+
+        public void gameOver(){
+            Picture gameOver = new Picture(170,100,"resources/menus/gameLost.png");
+            gameOver.draw();
+            try{
+                cat.setStopCat(true);
+                Thread.sleep(6000);
+                System.exit(0);
+            }catch (InterruptedException interruptedException){
+                System.out.println(interruptedException.getMessage());
+            }
+        }
+
         public void plot () throws InterruptedException {
 
             Rectangle fundo = new Rectangle(10, 10, 1280, 720);
@@ -128,7 +153,7 @@ public class Game {
             final long TOTAL_TIME = TimeUnit.MINUTES.toMillis(1);
             final long WAITING_TIME = TimeUnit.SECONDS.toMillis(1);
 
-            level = new Level();
+            level = new Level(this);
             player = new Player(level);
             cat = new Cat(level);
             showScore();
@@ -138,9 +163,9 @@ public class Game {
             clockTxt.setColor(Color.WHITE);
             clockTxt.draw();
 
-            Timer timer = new Timer();
+            timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
-                private int executions = 120;
+                 int executions = 60;
 
                 @Override
                 public void run() {
@@ -150,12 +175,13 @@ public class Game {
 
                     clockTxt.setText(String.format("%d:%02d", minutes, seconds));
 
-                    //System.out.println(minutes + ":" + seconds);
 
                     if (executions == 0) {
+                        gameOver();
                         timer.cancel();
                     }
                     executions--;
+                    timeLeft = executions;
                 }
             }, 0, WAITING_TIME);
 
@@ -177,7 +203,7 @@ public class Game {
             INSTRUCTIONS,
             QUIT
         }
-    }
+}
 
 
 

@@ -21,6 +21,7 @@ public class Cat extends Character {
     private final int MAX = 300;
     private Level level;
     private boolean collided = false;
+    private boolean stopCat = false;
 
 
     public Cat(Level level) {
@@ -63,7 +64,6 @@ public class Cat extends Character {
         for (GameObject go : level.getField().getObjects()) {
 
             if (!(go instanceof Poop) && !(go instanceof Weed)  && (catImage.getMaxX() >= go.getX()+5 && catImage.getMaxY() >= go.getY()+5) && (catImage.getX() <= go.getMaxX()-5 && catImage.getY() <= go.getMaxY()-5)) {
-               // System.out.println("Collided with " + go.getName());
                 move(list.getLast().opposite());
                 collided = true;
             }
@@ -90,7 +90,7 @@ public class Cat extends Character {
               list.add(dir);
               Thread.sleep(500);
 
-              if (dir == Direction.SIT) {
+              if (dir == Direction.SIT && !stopCat) {
 
                   numOfMoves = 0;
                   Thread.sleep(1500);
@@ -182,4 +182,7 @@ public class Cat extends Character {
         return catImage.getMaxY() - 20;
     }
 
+    public void setStopCat(boolean stopCat) {
+        this.stopCat = stopCat;
+    }
 }
