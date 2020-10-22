@@ -42,7 +42,7 @@ public class Game {
 
 
     public void init() throws InterruptedException{
-        Picture menu = new Picture(0,0, "menus/menu.png");
+        Picture menu = new Picture(10,10, "menus/menu.png");
         menu.draw();
         Picture heart = new Picture(30,245,"menus/heart.png");
         heart.draw();
@@ -107,7 +107,7 @@ public class Game {
 
     public void instructions() {
 
-        Picture instructions = new Picture(0,0,"menus/instructions.png");
+        Picture instructions = new Picture(10,10,"menus/instructions.png");
         instructions.draw();
 
 
@@ -117,7 +117,7 @@ public class Game {
 
     public void plot () throws InterruptedException {
 
-        Rectangle fundo = new Rectangle(0,0,1280,720);
+        Rectangle fundo = new Rectangle(10,10,1280,720);
         fundo.setColor(Color.BLACK);
         fundo.fill();
         Picture menu = new Picture(170,100, "menus/tinder.png");
