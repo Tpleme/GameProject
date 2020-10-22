@@ -107,6 +107,7 @@ public class Game {
 
             Text score = new Text(500,50,"Score");
             score.draw();
+
         }
 
         public void gameOver(){
