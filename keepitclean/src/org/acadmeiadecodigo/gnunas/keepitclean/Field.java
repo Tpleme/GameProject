@@ -1,5 +1,6 @@
 package org.acadmeiadecodigo.gnunas.keepitclean;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.acadmeiadecodigo.gnunas.keepitclean.objects.*;
@@ -41,6 +42,7 @@ public class Field {
     //Desenha o fundo, sala e os objetos contidos no array
     public void draw(){
        screen = new Rectangle(PADDING,PADDING,width,height);
+       screen.setColor(Color.BLACK);
        screen.fill();
 
        background = new Picture(offsetX,offsetY,"resources/livingRoom (1).png");

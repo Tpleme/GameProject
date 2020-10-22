@@ -2,11 +2,17 @@ package org.acadmeiadecodigo.gnunas.keepitclean;
 
 import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
     public static void main(String[] args){
 
-        //Sound sound = new Sound("/resources/Sound/ArcadeKid.wav");
-        //sound.play(true);
+        Sound sound = new Sound("/resources/Sound/ArcadeKid.wav");
+        sound.play(true);
+        sound.loopIndef();
 
         try {
 
@@ -23,7 +29,10 @@ public class Main {
 
             game.init();
 
+            game.plot();
+
             game.start();
+
         }
         catch (InterruptedException interruptedException){
             System.out.println(interruptedException.getMessage());

@@ -40,7 +40,7 @@ public class Player extends Character {
     }
 
     public void kbConfiguration(){
-        kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace());
+        kbPlayerHandler = new KeyboardPlayerHandler(this,direction,PlayerKey.KEY.getUp(), PlayerKey.KEY.getDown(), PlayerKey.KEY.getLeft(), PlayerKey.KEY.getRight(), PlayerKey.KEY.getSpace(),PlayerKey.KEY.getQ());
         kbPlayerHandler.loadKboardConfig();
     }
 

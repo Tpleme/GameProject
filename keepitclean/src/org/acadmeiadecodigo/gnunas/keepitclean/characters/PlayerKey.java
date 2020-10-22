@@ -3,7 +3,7 @@ package org.acadmeiadecodigo.gnunas.keepitclean.characters;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
 public enum PlayerKey {
-   KEY(new int[]{KeyboardEvent.KEY_UP, KeyboardEvent.KEY_DOWN,KeyboardEvent.KEY_LEFT,KeyboardEvent.KEY_RIGHT,KeyboardEvent.KEY_SPACE});
+   KEY(new int[]{KeyboardEvent.KEY_UP, KeyboardEvent.KEY_DOWN,KeyboardEvent.KEY_LEFT,KeyboardEvent.KEY_RIGHT,KeyboardEvent.KEY_SPACE,KeyboardEvent.KEY_Q});
 
    private int [] keys;
 
@@ -29,6 +29,9 @@ public enum PlayerKey {
 
     public int getRight(){
         return keys[3];
+    }
+
+    public  int getQ(){ return keys[5];
     }
 
 

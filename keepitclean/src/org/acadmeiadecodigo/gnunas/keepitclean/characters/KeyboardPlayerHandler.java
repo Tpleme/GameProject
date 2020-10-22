@@ -5,6 +5,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.acadmeiadecodigo.gnunas.keepitclean.Direction;
+import org.acadmeiadecodigo.gnunas.keepitclean.Game;
 
 public class KeyboardPlayerHandler implements KeyboardHandler {
 
@@ -13,16 +14,16 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
     private boolean moving;
     private boolean interacting;
     private int[] keyList;
-    private boolean[] pressedKeys = new boolean[5];
+    private boolean[] pressedKeys = new boolean[6];
     private Player player;
 
 
-    public KeyboardPlayerHandler(Player player, Direction direction, int up,int down,int left,int right,int space){
+    public KeyboardPlayerHandler(Player player, Direction direction, int up,int down,int left,int right,int space,int q){
         this.direction =direction;
         moving = false;
         interacting = false;
         kb = new Keyboard(this);
-        keyList= new int[]{up,down,left,right,space};
+        keyList= new int[]{up,down,left,right,space,q};
         this.player = player;
 
     }
@@ -98,6 +99,13 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
         releasedSpace.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         kb.addEventListener(releasedSpace);
 
+        KeyboardEvent pressedQ = new KeyboardEvent();
+        pressedQ.setKey(keyList[5]);
+        pressedQ.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        kb.addEventListener(pressedQ);
+
+
+
     }
 
     private Direction moveNewDirection(){
@@ -151,6 +159,11 @@ public class KeyboardPlayerHandler implements KeyboardHandler {
             player.setInteracting(true);
             System.out.println(player.isInteracting());
         }
+        if(keyboardEvent.getKey()==keyList[5]){
+            pressedKeys[5] = true;
+            System.exit(0);
+        }
+
 
         direction = moveNewDirection();
         player.checkMovement();

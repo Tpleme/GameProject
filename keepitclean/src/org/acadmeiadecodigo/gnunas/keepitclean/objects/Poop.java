@@ -6,6 +6,7 @@ import org.acadmeiadecodigo.gnunas.keepitclean.characters.Cat;
 public class Poop extends GameObject implements Interactable {
 
     public Poop(Cat cat) {
+
         super(cat.getImageX(),cat.getImageY(),"Poop","GameObject/poop.png");
         clean = false;
         this.draw();
