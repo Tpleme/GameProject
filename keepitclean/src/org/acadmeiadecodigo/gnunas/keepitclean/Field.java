@@ -29,13 +29,13 @@ public class Field {
     //Instancia os GameObjects desta sala e guarda-os num array de GameObjects
     private void fillObjList(){
 
-        objects.add(new Table(696 + offsetX,206 + offsetY, "Table","objects/DirtTable.png"));
-        objects.add(new Bookshelf(89 + offsetX,35 + offsetY,"Bookshelf","objects/BookShelf.png"));
-        objects.add(new Couch(92 + offsetX, 200 + offsetY, "Couch" , "objects/DirtCouch.png"));
-        objects.add(new Plant(480 + offsetX, 42 + offsetY, "Plant" ,"objects/DriedPlant.png"));
-        objects.add(new Plant(640 + offsetX, 42 + offsetY, "Plant2", "objects/DriedPlant.png"));
-        objects.add(new Trash(900 + offsetX, 450 + offsetY, "Trash", "objects/DirtTrash.png"));
-        objects.add(new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"GameObject/weed.png"));
+        objects.add(new Table(696 + offsetX,206 + offsetY, "Table","resources/objects/DirtTable.png"));
+        objects.add(new Bookshelf(89 + offsetX,35 + offsetY,"Bookshelf","resources/objects/BookShelf.png"));
+        objects.add(new Couch(92 + offsetX, 200 + offsetY, "Couch" , "resources/objects/DirtCouch.png"));
+        objects.add(new Plant(480 + offsetX, 42 + offsetY, "Plant" ,"resources/objects/DriedPlant.png"));
+        objects.add(new Plant(640 + offsetX, 42 + offsetY, "Plant2", "resources/objects/DriedPlant.png"));
+        objects.add(new Trash(900 + offsetX, 450 + offsetY, "Trash", "resources/objects/DirtTrash.png"));
+        objects.add(new Weed((int) (170 + (Math.random() * (960 - 100))), 510,"resources/GameObject/weed.png"));
 
     }
 
